@@ -74,7 +74,7 @@
         "rank": { "type": "integer", "minimum": 1, "maximum": 50 },
         "title": { "type": ["string", "null"], "maxLength": 4096 },
         "source_uri": { "$ref": "#/$defs/nullableUri" },
-        "source_app": { "const": "info-app" },
+        "source_app": { "const": "knowfeed-app" },
         "source_document_id": { "$ref": "#/$defs/uuid" },
         "source_document_version_id": { "$ref": "#/$defs/uuid" },
         "content_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },

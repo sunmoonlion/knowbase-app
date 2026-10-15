@@ -7,9 +7,9 @@ must not be edited as substitute schemas.
 ## Artifact ingestion
 
 - Current compatible major: `artifact/v1`
-- Request schema: `artifact/v1/info-knowledge-artifact.schema.json`
+- Request schema: `artifact/v1/knowfeed-knowbase-artifact.schema.json`
 - Release manifest and digest: `artifact/v1/contract-manifest.json`
-- Producer: Info App
+- Producer: Knowfeed App
 - Provider/consumer: Knowledge App
 
 The v1 contract accepts exactly one immutable, versioned `s3://` object. The

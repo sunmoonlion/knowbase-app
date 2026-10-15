@@ -1,6 +1,6 @@
 ---
-description: 管理端 Next.js（knowledge-admin-frontend）
-globs: **/knowledge-admin-frontend/**/*.{tsx,ts,jsx,js}
+description: 管理端 Next.js（knowbase-admin-frontend）
+globs: **/knowbase-admin-frontend/**/*.{tsx,ts,jsx,js}
 alwaysApply: false
 ---
 

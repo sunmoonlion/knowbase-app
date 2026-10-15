@@ -1,9 +1,9 @@
-[submodule "knowledge-admin-frontend"]
-	path = knowledge-admin-frontend
-	url = https://github.com/sunmoonlion/knowledge-admin-frontend.git
-[submodule "knowledge-web-frontend"]
-	path = knowledge-web-frontend
-	url = https://github.com/sunmoonlion/knowledge-web-frontend.git
-[submodule "knowledge-backend"]
-	path = knowledge-backend
-	url = https://github.com/sunmoonlion/knowledge-backend.git
+[submodule "knowbase-admin-frontend"]
+	path = knowbase-admin-frontend
+	url = https://github.com/sunmoonlion/knowbase-admin-frontend.git
+[submodule "knowbase-web-frontend"]
+	path = knowbase-web-frontend
+	url = https://github.com/sunmoonlion/knowbase-web-frontend.git
+[submodule "knowbase-backend"]
+	path = knowbase-backend
+	url = https://github.com/sunmoonlion/knowbase-backend.git

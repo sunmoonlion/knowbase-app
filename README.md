@@ -1,4 +1,4 @@
-# knowledge-app
+# knowbase-app
 
 Knowledge 领域的架构 v2 实例父仓。活跃源码固定为两个 Next.js 前端与一个统一
 FastAPI Backend；Admin/Web 只是应用层入口，不再各自拥有 Backend。
@@ -7,9 +7,9 @@ FastAPI Backend；Admin/Web 只是应用层入口，不再各自拥有 Backend�
 
 | 子模块 | 技术栈 | 职责 |
 | --- | --- | --- |
-| `knowledge-admin-frontend` | Next.js + React | 数据集、摄取、Provider 绑定与治理操作 |
-| `knowledge-web-frontend` | Next.js + React | 用户侧知识检索与引用体验 |
-| `knowledge-backend` | FastAPI + Python 3.12 | `application/admin`、`application/web`、`application/internal` 共用的领域与基础设施 |
+| `knowbase-admin-frontend` | Next.js + React | 数据集、摄取、Provider 绑定与治理操作 |
+| `knowbase-web-frontend` | Next.js + React | 用户侧知识检索与引用体验 |
+| `knowbase-backend` | FastAPI + Python 3.12 | `application/admin`、`application/web`、`application/internal` 共用的领域与基础设施 |
 
 Knowledge 拥有 Dataset、Provider binding、Ingestion、Retrieval 与 Citation 事实；
 不接管 Info 来源或 Investment Run 状态。
@@ -18,7 +18,7 @@ Knowledge 拥有 Dataset、Provider binding、Ingestion、Retrieval 与 Citation
 
 - `.gitmodules` 是活跃源码拓扑的机器可读权威，必须且只能包含上述三项。
 - 根目录不保存旧 worker 副本、NodeBull worker、模板初始化器或 K8s scaffold。
-  Worker 入口由 `knowledge-backend` 提供，部署声明由 `k8s` 仓库维护。
+  Worker 入口由 `knowbase-backend` 提供，部署声明由 `k8s` 仓库维护。
 - `docs/INSTANCE_FOUNDATION_ALIGNED.json` 与 `docs/P0-009-DOMAIN-RECOVERY.md`
   是迁移前历史证据，不代表当前拓扑。
 - RAGFlow、文档转换与 ONLYOFFICE 属于 Knowledge 领域外部能力/适配器，是否部署
@@ -32,14 +32,14 @@ Knowledge 拥有 Dataset、Provider binding、Ingestion、Retrieval 与 Citation
 
 ```bash
 git clone --recurse-submodules --branch architecture-v2 \
-  https://github.com/sunmoonlion/knowledge-app.git
+  https://github.com/sunmoonlion/knowbase-app.git
 
 git pull --ff-only
 git submodule sync --recursive
 git submodule update --init --recursive
 ```
 
-后端质量门禁在 `knowledge-backend/app` 执行：
+后端质量门禁在 `knowbase-backend/app` 执行：
 
 ```bash
 uv sync --frozen

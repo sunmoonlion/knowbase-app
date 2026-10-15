@@ -13,7 +13,7 @@
       "rank": 1,
       "title": "Market policy update",
       "source_uri": "https://example.com/policy/update",
-      "source_app": "info-app",
+      "source_app": "knowfeed-app",
       "source_document_id": "83bb7926-47f0-4262-8215-27da1cc1e681",
       "source_document_version_id": "359ea32d-90b3-47e4-9168-930bfb768d0d",
       "content_hash": "d5e88ee6a2f80b367f23aa4aa82a1c0c7be25a774dc91f8b66737d01a4748cc7",
