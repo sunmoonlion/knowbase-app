@@ -134,7 +134,7 @@ Knowledge 最终本地检查点 `ffc88f94d2dcfec728eef43a668f8c8756453e84`，只
 历史正式 manifest、部署 bundle 和线上数据库保持原状。开发源码锁明确
 `formal_release=false`，不能替代正式镜像/部署/数据发布锁。迁移回滚遇到任何 Provider
 回执时拒绝丢数据，须使用已验证整库备份恢复，并单独处置回滚窗口内的外部副作用。
-跨 App 最终 master/worktree 收口仍需等 Investment 完成。
+跨 App 最终 master/worktree 收口仍需等 Knowbench 完成。
 
 ## 2026-09-13 B7a：公共日志增量对齐
 
@@ -185,7 +185,7 @@ Knowledge 固定 `knowbase-backend@d16fb6c` 最后两次全量 **286 passed / 0 
 
 首轮常规套件在旧重放观测及上传响应丢失恢复处失败，曾暂停串行推进。后捕获隔离 DB
 时钟倒退约 1.876 秒，核实 WSL Hyper-V 隐式校时与 timesyncd 同开；经批准关闭重复
-校时后原断言不变、常规套件连续通过，才推进 Investment。不是放宽断言或跳过旧测试。
+校时后原断言不变、常规套件连续通过，才推进 Knowbench。不是放宽断言或跳过旧测试。
 详细环境证据与最终复跑回执见 k8s 的 v5-backlog-worker-readiness-luna.md。
 
 本增量无配置差异、临时兼容或违规漂移；领域任务注册/摄入/Provider/迁移/契约均保留。
@@ -195,7 +195,7 @@ Knowledge 固定 `knowbase-backend@d16fb6c` 最后两次全量 **286 passed / 0 
 
 ## 2026-09-13 B7f：显式投递状态与时钟回退
 
-模板本地固定 `tpl-backend@1c5173b` 先过 176 项完整门禁，再串行 Info→Knowledge→Investment。
+模板本地固定 `tpl-backend@1c5173b` 先过 176 项完整门禁，再串行 Info→Knowledge→Knowbench。
 本仓本地固定 `knowbase-backend@94512d5` 全量 **335 passed / 0 skipped**，Ruff/Pyright 通过。
 公共四生产文件、9 项故障回归及说明六文件与模板 SHA-256 一致。
 新增四项复用原上传/解析响应丢失、轮询时限及重放观测场景的故障回归；Provider/摄入领域代码未改。

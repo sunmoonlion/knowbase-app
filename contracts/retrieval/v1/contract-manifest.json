@@ -3,16 +3,16 @@
   "major": 1,
   "provider": "knowbase-app",
   "service_consumers": [
-    "investment-app"
+    "knowbench-app"
   ],
   "browser_consumers": [
-    "investment-web-frontend"
+    "knowbench-web-frontend"
   ],
   "files": {
     "knowledge-retrieval-request.schema.json": "1a09240f1183e13eff708fd6dbc5a39742d29bbcdd9d86b4646232e55e3cacf8",
     "knowledge-retrieval-response.schema.json": "aa664cdc6e069f991fba38ff3490170a8e471dd52fb139b4c465c18bcce1fc10",
     "citation.schema.json": "330aecdedbac40198116217f514cbe953afdba96fab0861d78c9d5bc5807b180",
-    "examples/request.json": "91f7a587ddf49eae117c151ac0d9b67ccfefa6a323d004eb07fb5fe180b150b9",
+    "examples/request.json": "a161281e7dd3d0738e7fc20f2f0ff8919e797e9fe0c4b905e2ef0943aa917f6f",
     "examples/response.json": "1748faaa712cbf226d225a217017a8548183250842075f103b706bffdceac91a",
     "examples/citation.json": "71513772f71c8564bad0c353a230edada2bd157e9236c75371acedbe008687a5"
   },

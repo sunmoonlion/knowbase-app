@@ -12,7 +12,7 @@ FastAPI Backend；Admin/Web 只是应用层入口，不再各自拥有 Backend�
 | `knowbase-backend` | FastAPI + Python 3.12 | `application/admin`、`application/web`、`application/internal` 共用的领域与基础设施 |
 
 Knowledge 拥有 Dataset、Provider binding、Ingestion、Retrieval 与 Citation 事实；
-不接管 Info 来源或 Investment Run 状态。
+不接管 Info 来源或 Knowbench Run 状态。
 
 ## 架构边界
 
