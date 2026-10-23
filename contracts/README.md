@@ -57,7 +57,7 @@ the cluster. Two kinds of caller:
 | --- | --- | --- |
 | The user, via an app backend | `Bearer <user token>`: the app exchanges the user's Casdoor access token for one with `aud` = knowbase (RFC 8693); `sub` is the user, `azp` names the app partition | `POST/GET /items`, `GET /items/{id}`, `GET /items/{id}/content`, `DELETE /items/{id}`, `POST /consents`, `DELETE /consents/{id}`, `POST /grants` (delegation, session, incubation), `POST /grants/{id}/revoke` |
 | knowlab backend | service identity with `knowbase:user-data-grant-test` | `POST /test-grants`, `POST /test-grants/{id}/revoke` |
-| The reading app (knowbench workbench) | service identity with `knowbase:user-data-read`; knowbase maps the service subject to the reading app (`USER_DATA_READER_APPS_JSON`) | `GET /grants/{id}`, `GET /grants/{id}/items/{item}/content`, `GET /grants/{id}/items/{item}/format` |
+| The reading app (knowbench workbench) | service identity with `knowbase:user-data-read`; knowbase maps the service subject to the reading app (`USER_DATA_READER_APPS_JSON`) | `GET /grants/{id}`, `GET /grants/{id}/items/{item}/content`, `GET /grants/{id}/items/{item}/format`, `POST /grants/{id}/release` (hand back its own grant when the delegation or session ends; idempotent) |
 | knowmart backend | service identity with `knowbase:user-data-purchase` | `POST /purchases` |
 
 Service scopes follow the cross-app `<target>:<relation>` convention, so callers
