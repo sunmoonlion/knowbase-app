@@ -1,0 +1,643 @@
+{
+  "$defs": {
+    "ConsentCreate": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PinIn"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "purpose": {
+          "maxLength": 80,
+          "minLength": 2,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "purpose",
+        "ref",
+        "items"
+      ],
+      "title": "ConsentCreate",
+      "type": "object"
+    },
+    "ConsentRead": {
+      "properties": {
+        "app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "App",
+          "type": "string"
+        },
+        "consent_id": {
+          "title": "Consent Id",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PinIn"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "withdrawn_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Withdrawn At"
+        }
+      },
+      "required": [
+        "consent_id",
+        "app",
+        "purpose",
+        "ref",
+        "items",
+        "created_at",
+        "withdrawn_at"
+      ],
+      "title": "ConsentRead",
+      "type": "object"
+    },
+    "FormatRead": {
+      "properties": {
+        "header": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Header"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "sheets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sheets",
+          "type": "array"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item_id",
+        "name",
+        "media_type",
+        "size_bytes",
+        "sha256",
+        "sheets",
+        "header"
+      ],
+      "title": "FormatRead",
+      "type": "object"
+    },
+    "GrantRead": {
+      "properties": {
+        "app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "App",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "grant_id": {
+          "title": "Grant Id",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PinIn"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "test",
+            "delegation",
+            "session",
+            "incubation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reader_app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "Reader App",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Revoked At"
+        },
+        "scope": {
+          "enum": [
+            "content",
+            "format"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_id",
+        "kind",
+        "app",
+        "reader_app",
+        "ref",
+        "scope",
+        "items",
+        "issued_at",
+        "expires_at",
+        "revoked_at"
+      ],
+      "title": "GrantRead",
+      "type": "object"
+    },
+    "GrantView": {
+      "description": "读的一方看到的：钉住的那几份叫什么、什么格式（不含内容）。",
+      "properties": {
+        "app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "App",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "grant_id": {
+          "title": "Grant Id",
+          "type": "string"
+        },
+        "granted": {
+          "items": {
+            "$ref": "#/$defs/GrantedItem"
+          },
+          "title": "Granted",
+          "type": "array"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PinIn"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "test",
+            "delegation",
+            "session",
+            "incubation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reader_app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "Reader App",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Revoked At"
+        },
+        "scope": {
+          "enum": [
+            "content",
+            "format"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_id",
+        "kind",
+        "app",
+        "reader_app",
+        "ref",
+        "scope",
+        "items",
+        "issued_at",
+        "expires_at",
+        "revoked_at",
+        "granted"
+      ],
+      "title": "GrantView",
+      "type": "object"
+    },
+    "GrantedItem": {
+      "properties": {
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item_id",
+        "name",
+        "media_type",
+        "size_bytes",
+        "sha256"
+      ],
+      "title": "GrantedItem",
+      "type": "object"
+    },
+    "ItemRead": {
+      "properties": {
+        "app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "App",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "origin": {
+          "enum": [
+            "upload",
+            "collect",
+            "purchase"
+          ],
+          "title": "Origin",
+          "type": "string"
+        },
+        "origin_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Origin Ref"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "item_id",
+        "app",
+        "name",
+        "media_type",
+        "size_bytes",
+        "sha256",
+        "origin",
+        "origin_ref",
+        "created_at"
+      ],
+      "title": "ItemRead",
+      "type": "object"
+    },
+    "PinIn": {
+      "additionalProperties": false,
+      "properties": {
+        "item_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Item Id",
+          "type": "string"
+        },
+        "sha256": {
+          "maxLength": 64,
+          "minLength": 64,
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "sha256"
+      ],
+      "title": "PinIn",
+      "type": "object"
+    },
+    "PurchaseCreate": {
+      "additionalProperties": false,
+      "properties": {
+        "buyer": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Buyer",
+          "type": "string"
+        },
+        "buyer_app": {
+          "enum": [
+            "knowbench",
+            "knowlab"
+          ],
+          "title": "Buyer App",
+          "type": "string"
+        },
+        "seller": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Seller",
+          "type": "string"
+        },
+        "seller_item_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Seller Item Id",
+          "type": "string"
+        },
+        "transaction_ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Transaction Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seller",
+        "seller_item_id",
+        "buyer",
+        "buyer_app",
+        "transaction_ref"
+      ],
+      "title": "PurchaseCreate",
+      "type": "object"
+    },
+    "TestGrantCreate": {
+      "additionalProperties": false,
+      "description": "knowlab 凭同意依据签测试授权。",
+      "properties": {
+        "consent_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Consent Id",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PinIn"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "owner": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        },
+        "reader_app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "Reader App",
+          "type": "string"
+        },
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        },
+        "ttl_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 604800,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ttl Seconds"
+        }
+      },
+      "required": [
+        "owner",
+        "consent_id",
+        "reader_app",
+        "ref",
+        "items"
+      ],
+      "title": "TestGrantCreate",
+      "type": "object"
+    },
+    "UserGrantCreate": {
+      "additionalProperties": false,
+      "description": "用户本人签：委托、会话、孵化。",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PinIn"
+          },
+          "maxItems": 64,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "delegation",
+            "session",
+            "incubation"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "reader_app": {
+          "enum": [
+            "knowbench",
+            "knowlab",
+            "knowmart"
+          ],
+          "title": "Reader App",
+          "type": "string"
+        },
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        },
+        "ttl_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "maximum": 604800,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ttl Seconds"
+        }
+      },
+      "required": [
+        "kind",
+        "reader_app",
+        "ref",
+        "items"
+      ],
+      "title": "UserGrantCreate",
+      "type": "object"
+    }
+  },
+  "$id": "https://contracts.sunmoonai.com/knowbase/user-data/v1/user-data.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "knowbase user-data v1"
+}

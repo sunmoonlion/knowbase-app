@@ -40,3 +40,31 @@ including an authorized same-origin source path instead of a raw provider URL.
 Breaking changes require a new major directory. Additive optional response
 fields remain compatible, but consumers must pin the manifest digests and run
 consumer-driven contract tests before accepting a provider release.
+
+## User data (per user x app knowledge bases, SDD 0042)
+
+- Current compatible major: `user-data/v1`
+- Schemas: `user-data/v1/user-data.schema.json` (generated from
+  `knowbase-backend/app/app/interfaces/schemas/user_data.py`; the test
+  `tests/test_user_data_contract.py` keeps them byte-identical)
+- Release manifest and digest: `user-data/v1/contract-manifest.json`
+- Provider: knowbase-app; service consumers: knowbench-app, knowlab-app, knowmart-app
+
+All paths are under `/api/internal/v1/user-data` and reachable only from inside
+the cluster. Two kinds of caller:
+
+| Caller | Authorization | Endpoints |
+| --- | --- | --- |
+| The user, via an app backend | `Bearer <user token>`: the app exchanges the user's Casdoor access token for one with `aud` = knowbase (RFC 8693); `sub` is the user, `azp` names the app partition | `POST/GET /items`, `GET /items/{id}`, `GET /items/{id}/content`, `DELETE /items/{id}`, `POST /consents`, `DELETE /consents/{id}`, `POST /grants` (delegation, session, incubation), `POST /grants/{id}/revoke` |
+| knowlab backend | service identity with `user-data:grant-test` | `POST /test-grants`, `POST /test-grants/{id}/revoke` |
+| The reading app (knowbench workbench) | service identity with exactly one `user-data:read:<app>` | `GET /grants/{id}`, `GET /grants/{id}/items/{item}/content`, `GET /grants/{id}/items/{item}/format` |
+| knowmart backend | service identity with `user-data:purchase` | `POST /purchases` |
+
+Uploads send the file itself as the request body (`?name=` carries the file
+name); content responses carry `X-Content-SHA256`. Errors are the usual
+`{code, message}` bodies; codes include `item_not_found`, `grant_not_found`,
+`consent_not_found`, `in_use`, `sha256_mismatch`, `grant_inactive`,
+`format_only`, `outside_consent`, `partition_invalid`, `type_not_allowed`,
+`too_large`, `quota_exceeded`, `storage_mismatch`.
+
+Breaking changes require a new major directory.
