@@ -370,6 +370,25 @@
       "title": "GrantedItem",
       "type": "object"
     },
+    "ItemCheck": {
+      "description": "核一次的回答：这份还能按这个授权读，版本是这个。",
+      "properties": {
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "sha256"
+      ],
+      "title": "ItemCheck",
+      "type": "object"
+    },
     "ItemRead": {
       "properties": {
         "app": {
