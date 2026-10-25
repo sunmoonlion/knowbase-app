@@ -417,6 +417,11 @@
           "title": "Name",
           "type": "string"
         },
+        "no_resale": {
+          "default": false,
+          "title": "No Resale",
+          "type": "boolean"
+        },
         "origin": {
           "enum": [
             "upload",
@@ -499,6 +504,11 @@
           ],
           "title": "Buyer App",
           "type": "string"
+        },
+        "no_resale": {
+          "default": false,
+          "title": "No Resale",
+          "type": "boolean"
         },
         "seller": {
           "maxLength": 255,
