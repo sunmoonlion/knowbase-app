@@ -71,4 +71,10 @@ name); content responses carry `X-Content-SHA256`. Errors are the usual
 `format_only`, `outside_consent`, `partition_invalid`, `type_not_allowed`,
 `too_large`, `quota_exceeded`, `storage_mismatch`.
 
+Withdrawing a consent (`DELETE /consents/{id}`) only stops grants issued after it;
+grants already issued from that consent stay valid until they are handed back,
+revoked or expire (decided 2026-10-25, Fable review D03). Grants keep their
+`consent_id`, so revoking them along with the consent can be added later if a
+user-facing "withdraw consent" ever needs it.
+
 Breaking changes require a new major directory.
