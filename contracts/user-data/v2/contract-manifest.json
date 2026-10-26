@@ -1,0 +1,18 @@
+{
+  "contract": "sunmoonai.knowbase.user-data",
+  "major": 2,
+  "provider": "knowbase-app",
+  "service_consumers": [
+    "knowbench-app",
+    "knowlab-app",
+    "knowmart-app"
+  ],
+  "files": {
+    "user-data.schema.json": "dd64b1e863c31e69f97b3b95325060d9fa010ad80d6fdff41b79f3b03a6308eb"
+  },
+  "compatibility": {
+    "requests": "exact-fields-v2",
+    "responses": "consumers-must-tolerate-additive-optional-fields",
+    "breaking_change": "new-major-and-dual-version-window"
+  }
+}

@@ -1,0 +1,480 @@
+{
+  "$defs": {
+    "DescriptionIn": {
+      "additionalProperties": false,
+      "description": "本人填的描述；整份替换。`confirm` 勾了才算用户确认过（参与解析）。",
+      "properties": {
+        "confirm": {
+          "default": false,
+          "title": "Confirm",
+          "type": "boolean"
+        },
+        "data_format": {
+          "anyOf": [
+            {
+              "maxLength": 16,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Data Format"
+        },
+        "disclosed_on": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Disclosed On"
+        },
+        "doc_type": {
+          "anyOf": [
+            {
+              "maxLength": 32,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Doc Type"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period Start"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject"
+        }
+      },
+      "title": "DescriptionIn",
+      "type": "object"
+    },
+    "DescriptionRead": {
+      "properties": {
+        "data_format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Format"
+        },
+        "disclosed_on": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Disclosed On"
+        },
+        "doc_type": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Doc Type"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Period Start"
+        },
+        "resolvable": {
+          "title": "Resolvable",
+          "type": "boolean"
+        },
+        "status": {
+          "enum": [
+            "unconfirmed",
+            "confirmed",
+            "checked"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subject"
+        },
+        "vocab_version": {
+          "title": "Vocab Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "subject",
+        "doc_type",
+        "period_start",
+        "period_end",
+        "disclosed_on",
+        "data_format",
+        "status",
+        "vocab_version",
+        "resolvable"
+      ],
+      "title": "DescriptionRead",
+      "type": "object"
+    },
+    "HistoryEntryRead": {
+      "properties": {
+        "after": {
+          "additionalProperties": true,
+          "title": "After",
+          "type": "object"
+        },
+        "at": {
+          "format": "date-time",
+          "title": "At",
+          "type": "string"
+        },
+        "before": {
+          "additionalProperties": true,
+          "title": "Before",
+          "type": "object"
+        },
+        "what": {
+          "enum": [
+            "description",
+            "license"
+          ],
+          "title": "What",
+          "type": "string"
+        }
+      },
+      "required": [
+        "at",
+        "what",
+        "before",
+        "after"
+      ],
+      "title": "HistoryEntryRead",
+      "type": "object"
+    },
+    "HoldingRead": {
+      "properties": {
+        "basis": {
+          "enum": [
+            "upload",
+            "collect",
+            "purchase",
+            "reference",
+            "output"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "license": {
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        },
+        "version_no": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version No"
+        }
+      },
+      "required": [
+        "basis",
+        "license",
+        "version_no"
+      ],
+      "title": "HoldingRead",
+      "type": "object"
+    },
+    "LicenseIn": {
+      "additionalProperties": false,
+      "properties": {
+        "attest": {
+          "default": false,
+          "title": "Attest",
+          "type": "boolean"
+        },
+        "license": {
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        }
+      },
+      "required": [
+        "license"
+      ],
+      "title": "LicenseIn",
+      "type": "object"
+    },
+    "MaterialRead": {
+      "properties": {
+        "content_origin": {
+          "enum": [
+            "disclosure",
+            "collected",
+            "upload",
+            "output"
+          ],
+          "title": "Content Origin",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "current_version": {
+          "title": "Current Version",
+          "type": "integer"
+        },
+        "deleted": {
+          "title": "Deleted",
+          "type": "boolean"
+        },
+        "description": {
+          "$ref": "#/$defs/DescriptionRead"
+        },
+        "legacy_app": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Legacy App"
+        },
+        "license": {
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "mine": {
+          "title": "Mine",
+          "type": "boolean"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "material_id",
+        "name",
+        "mine",
+        "content_origin",
+        "license",
+        "description",
+        "current_version",
+        "created_at",
+        "deleted",
+        "legacy_app"
+      ],
+      "title": "MaterialRead",
+      "type": "object"
+    },
+    "ShelfEntryRead": {
+      "properties": {
+        "category": {
+          "enum": [
+            "uploaded",
+            "collected",
+            "purchased",
+            "output"
+          ],
+          "title": "Category",
+          "type": "string"
+        },
+        "holding": {
+          "$ref": "#/$defs/HoldingRead"
+        },
+        "material": {
+          "$ref": "#/$defs/MaterialRead"
+        },
+        "version": {
+          "$ref": "#/$defs/VersionRead"
+        }
+      },
+      "required": [
+        "category",
+        "material",
+        "holding",
+        "version"
+      ],
+      "title": "ShelfEntryRead",
+      "type": "object"
+    },
+    "VersionRead": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version_no",
+        "sha256",
+        "size_bytes",
+        "media_type",
+        "created_at"
+      ],
+      "title": "VersionRead",
+      "type": "object"
+    },
+    "VocabularyRead": {
+      "properties": {
+        "doc_types": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Doc Types",
+          "type": "object"
+        },
+        "formats": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "title": "Formats",
+          "type": "object"
+        },
+        "subject_kinds": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Subject Kinds",
+          "type": "array"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version",
+        "doc_types",
+        "formats",
+        "subject_kinds"
+      ],
+      "title": "VocabularyRead",
+      "type": "object"
+    }
+  },
+  "$id": "https://contracts.sunmoonai.com/knowbase/user-data/v2/user-data.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "knowbase user-data v2"
+}
