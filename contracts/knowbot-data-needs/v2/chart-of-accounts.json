@@ -29,6 +29,16 @@
     {
       "aliases": [],
       "cas_element": null,
+      "code": "IS.TOTAL_COST",
+      "company_types": [
+        "general"
+      ],
+      "name": "营业总成本",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
       "code": "IS.COST",
       "company_types": [
         "general"
@@ -128,6 +138,16 @@
         "general"
       ],
       "name": "投资收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.INVESTMENT_INCOME_JV",
+      "company_types": [
+        "general"
+      ],
+      "name": "对联营企业和合营企业的投资收益",
       "statement": "income"
     },
     {
@@ -246,6 +266,20 @@
         "bank"
       ],
       "name": "归属于母公司所有者的净利润",
+      "statement": "income"
+    },
+    {
+      "aliases": [
+        "归属于上市公司股东的扣除非经常性损益的净利润",
+        "扣除非经常性损益后归属于母公司所有者的净利润"
+      ],
+      "cas_element": null,
+      "code": "IS.NET_PROFIT_PARENT_DEDUCTED",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "扣除非经常性损益后归属于母公司股东的净利润",
       "statement": "income"
     },
     {
@@ -654,6 +688,16 @@
     {
       "aliases": [],
       "cas_element": null,
+      "code": "BS.NONCURRENT_LIAB_DUE_1Y",
+      "company_types": [
+        "general"
+      ],
+      "name": "一年内到期的非流动负债",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
       "code": "BS.TOTAL_CURRENT_LIABILITIES",
       "company_types": [
         "general"
@@ -924,6 +968,16 @@
     {
       "aliases": [],
       "cas_element": null,
+      "code": "CF.DIVIDENDS_INTEREST_PAID",
+      "company_types": [
+        "general"
+      ],
+      "name": "分配股利、利润或偿付利息支付的现金",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
       "code": "CF.NET_OPERATING",
       "company_types": [
         "general",
@@ -957,12 +1011,34 @@
     {
       "aliases": [],
       "cas_element": null,
+      "code": "CF.FX_EFFECT",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "汇率变动对现金及现金等价物的影响",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
       "code": "CF.NET_CHANGE_CASH",
       "company_types": [
         "general",
         "bank"
       ],
       "name": "现金及现金等价物净增加额",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.BEGINNING_CASH",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "期初现金及现金等价物余额",
       "statement": "cashflow"
     },
     {
