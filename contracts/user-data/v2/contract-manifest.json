@@ -8,7 +8,7 @@
     "knowmart-app"
   ],
   "files": {
-    "user-data.schema.json": "2a5ec918e9895f65e580a8827e51eba4287fcfb9fb53a86af399727d9fbfbf22"
+    "user-data.schema.json": "ff696156527de95fb625ca347b98c4f89830e78b2a52dc62661eb6fdc4f25f9d"
   },
   "compatibility": {
     "requests": "exact-fields-v2",

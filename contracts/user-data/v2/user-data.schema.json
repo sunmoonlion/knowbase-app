@@ -162,6 +162,16 @@
           "title": "Material Id",
           "type": "string"
         },
+        "media_type": {
+          "default": "",
+          "title": "Media Type",
+          "type": "string"
+        },
+        "name": {
+          "default": "",
+          "title": "Name",
+          "type": "string"
+        },
         "rendition_kind": {
           "anyOf": [
             {
@@ -198,6 +208,11 @@
         "sha256": {
           "title": "Sha256",
           "type": "string"
+        },
+        "size_bytes": {
+          "default": 0,
+          "title": "Size Bytes",
+          "type": "integer"
         },
         "version_no": {
           "title": "Version No",
