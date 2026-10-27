@@ -82,6 +82,42 @@
       "title": "BulkUseRead",
       "type": "object"
     },
+    "ConvertIn": {
+      "additionalProperties": false,
+      "description": "把一份产出转为数据；许可默认只许本人用，不得高于上游，改高要勾「我有权」。",
+      "properties": {
+        "attest": {
+          "default": false,
+          "title": "Attest",
+          "type": "boolean"
+        },
+        "license": {
+          "default": "self",
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        },
+        "name": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Name"
+        }
+      },
+      "title": "ConvertIn",
+      "type": "object"
+    },
     "DescriptionIn": {
       "additionalProperties": false,
       "description": "本人填的描述；整份替换。`confirm` 勾了才算用户确认过（参与解析）。",
@@ -342,6 +378,202 @@
       "title": "ExpertRead",
       "type": "object"
     },
+    "FreezeIn": {
+      "additionalProperties": false,
+      "description": "交付时冻结谁的绑定（专家的作者）。",
+      "properties": {
+        "author": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Author",
+          "type": "string"
+        }
+      },
+      "required": [
+        "author"
+      ],
+      "title": "FreezeIn",
+      "type": "object"
+    },
+    "GrantItemIn": {
+      "additionalProperties": false,
+      "description": "申请的一项：钉哪一版（与读法）、凭什么依据。\n\n依据：`display` + `app:<应用>`（展示给执行的应用）、`frozen_binding` +\n`expert:<专家>@<版本>`（作者交付时冻结的绑定）、`platform` +\n`platform:<应用>:<过程>:<编号>`（平台过程）。",
+      "properties": {
+        "basis": {
+          "enum": [
+            "display",
+            "frozen_binding",
+            "platform",
+            "processing",
+            "reference"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "basis_ref": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Basis Ref",
+          "type": "string"
+        },
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "rendition_kind": {
+          "anyOf": [
+            {
+              "enum": [
+                "text",
+                "pages",
+                "table",
+                "index",
+                "parse"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rendition Kind"
+        },
+        "rendition_no": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rendition No"
+        },
+        "rendition_sha256": {
+          "anyOf": [
+            {
+              "pattern": "^[0-9a-f]{64}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Rendition Sha256"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256",
+        "basis",
+        "basis_ref"
+      ],
+      "title": "GrantItemIn",
+      "type": "object"
+    },
+    "GrantItemRead": {
+      "properties": {
+        "basis": {
+          "title": "Basis",
+          "type": "string"
+        },
+        "basis_ref": {
+          "title": "Basis Ref",
+          "type": "string"
+        },
+        "content_owner": {
+          "title": "Content Owner",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "basis",
+        "basis_ref",
+        "content_owner"
+      ],
+      "title": "GrantItemRead",
+      "type": "object"
+    },
+    "GrantedFormatRead": {
+      "properties": {
+        "header": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Header"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "sheets": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Sheets",
+          "type": "array"
+        },
+        "size_bytes": {
+          "title": "Size Bytes",
+          "type": "integer"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "media_type",
+        "size_bytes",
+        "sha256",
+        "sheets",
+        "header"
+      ],
+      "title": "GrantedFormatRead",
+      "type": "object"
+    },
     "HistoryEntryRead": {
       "properties": {
         "after": {
@@ -385,7 +617,8 @@
             "collect",
             "purchase",
             "reference",
-            "output"
+            "output",
+            "convert"
           ],
           "title": "Basis",
           "type": "string"
@@ -502,6 +735,19 @@
         "name": {
           "title": "Name",
           "type": "string"
+        },
+        "provenance": {
+          "anyOf": [
+            {
+              "additionalProperties": true,
+              "type": "object"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provenance"
         }
       },
       "required": [
@@ -517,6 +763,111 @@
         "legacy_app"
       ],
       "title": "MaterialRead",
+      "type": "object"
+    },
+    "OutputWritten": {
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256"
+      ],
+      "title": "OutputWritten",
+      "type": "object"
+    },
+    "PendingProcessingRead": {
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "owner",
+        "material_id",
+        "version_no"
+      ],
+      "title": "PendingProcessingRead",
+      "type": "object"
+    },
+    "PinRead": {
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "rendition_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rendition Kind"
+        },
+        "rendition_no": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rendition No"
+        },
+        "rendition_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rendition Sha256"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256",
+        "rendition_kind",
+        "rendition_no",
+        "rendition_sha256"
+      ],
+      "title": "PinRead",
       "type": "object"
     },
     "PlatformConsentIn": {
@@ -557,6 +908,32 @@
       "title": "PlatformConsentIn",
       "type": "object"
     },
+    "PlatformEndIn": {
+      "additionalProperties": false,
+      "properties": {
+        "reason": {
+          "enum": [
+            "finished",
+            "rejected",
+            "cancelled"
+          ],
+          "title": "Reason",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "reason"
+      ],
+      "title": "PlatformEndIn",
+      "type": "object"
+    },
     "PlatformItemIn": {
       "additionalProperties": false,
       "properties": {
@@ -584,6 +961,35 @@
         "material_id"
       ],
       "title": "PlatformItemIn",
+      "type": "object"
+    },
+    "ProcessingGrantIn": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "owner",
+        "material_id",
+        "version_no"
+      ],
+      "title": "ProcessingGrantIn",
       "type": "object"
     },
     "PurchaseIn": {
@@ -666,6 +1072,508 @@
         "license"
       ],
       "title": "PurchaseRead",
+      "type": "object"
+    },
+    "ReadEventRead": {
+      "properties": {
+        "app": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "App"
+        },
+        "at": {
+          "format": "date-time",
+          "title": "At",
+          "type": "string"
+        },
+        "beneficiary": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Beneficiary"
+        },
+        "grant_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Grant Id"
+        },
+        "operation": {
+          "title": "Operation",
+          "type": "string"
+        },
+        "reader": {
+          "title": "Reader",
+          "type": "string"
+        },
+        "reader_role": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reader Role"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "at",
+        "reader",
+        "operation",
+        "app",
+        "grant_id",
+        "sha256",
+        "beneficiary",
+        "reader_role"
+      ],
+      "title": "ReadEventRead",
+      "type": "object"
+    },
+    "RenditionRead": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "detail": {
+          "additionalProperties": true,
+          "title": "Detail",
+          "type": "object"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "processor": {
+          "title": "Processor",
+          "type": "string"
+        },
+        "processor_version": {
+          "title": "Processor Version",
+          "type": "string"
+        },
+        "ready_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Ready At"
+        },
+        "rendition_no": {
+          "title": "Rendition No",
+          "type": "integer"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sha256"
+        },
+        "status": {
+          "enum": [
+            "pending",
+            "ready",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "rendition_no",
+        "processor",
+        "processor_version",
+        "status",
+        "sha256",
+        "detail",
+        "created_at",
+        "ready_at"
+      ],
+      "title": "RenditionRead",
+      "type": "object"
+    },
+    "RunGrantIn": {
+      "additionalProperties": false,
+      "description": "本人签：委托、会话（knowbench），孵化（knowlab）。\n\n同一个 ref 再签是运行中追加。",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/GrantItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "process": {
+          "enum": [
+            "delegation",
+            "session",
+            "incubation"
+          ],
+          "title": "Process",
+          "type": "string"
+        },
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        },
+        "ttl_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ttl Seconds"
+        }
+      },
+      "required": [
+        "process",
+        "ref",
+        "items"
+      ],
+      "title": "RunGrantIn",
+      "type": "object"
+    },
+    "RunGrantRead": {
+      "properties": {
+        "beneficiary": {
+          "title": "Beneficiary",
+          "type": "string"
+        },
+        "executor_app": {
+          "title": "Executor App",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "grant_id": {
+          "title": "Grant Id",
+          "type": "string"
+        },
+        "input_set_id": {
+          "title": "Input Set Id",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/GrantItemRead"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "process": {
+          "title": "Process",
+          "type": "string"
+        },
+        "reader_role": {
+          "title": "Reader Role",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Revoked At"
+        },
+        "scope": {
+          "enum": [
+            "content",
+            "format"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_id",
+        "process",
+        "executor_app",
+        "beneficiary",
+        "ref",
+        "revision",
+        "reader_role",
+        "scope",
+        "input_set_id",
+        "items",
+        "issued_at",
+        "expires_at",
+        "revoked_at"
+      ],
+      "title": "RunGrantRead",
+      "type": "object"
+    },
+    "RunGrantView": {
+      "description": "执行的应用看到的：外加钉住的组合（写清单 v2 用）。",
+      "properties": {
+        "beneficiary": {
+          "title": "Beneficiary",
+          "type": "string"
+        },
+        "executor_app": {
+          "title": "Executor App",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "grant_id": {
+          "title": "Grant Id",
+          "type": "string"
+        },
+        "input_set_id": {
+          "title": "Input Set Id",
+          "type": "string"
+        },
+        "issued_at": {
+          "format": "date-time",
+          "title": "Issued At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/GrantItemRead"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "pins": {
+          "items": {
+            "$ref": "#/$defs/PinRead"
+          },
+          "title": "Pins",
+          "type": "array"
+        },
+        "process": {
+          "title": "Process",
+          "type": "string"
+        },
+        "reader_role": {
+          "title": "Reader Role",
+          "type": "string"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        },
+        "revoked_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Revoked At"
+        },
+        "scope": {
+          "enum": [
+            "content",
+            "format"
+          ],
+          "title": "Scope",
+          "type": "string"
+        }
+      },
+      "required": [
+        "grant_id",
+        "process",
+        "executor_app",
+        "beneficiary",
+        "ref",
+        "revision",
+        "reader_role",
+        "scope",
+        "input_set_id",
+        "items",
+        "issued_at",
+        "expires_at",
+        "revoked_at",
+        "pins"
+      ],
+      "title": "RunGrantView",
+      "type": "object"
+    },
+    "ServiceRunGrantIn": {
+      "additionalProperties": false,
+      "description": "knowlab 签：测试（凭展示依据）、平台过程（凭 `platform:` 依据，运营或机器）。",
+      "properties": {
+        "beneficiary": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Beneficiary",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/GrantItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "process": {
+          "enum": [
+            "test",
+            "platform"
+          ],
+          "title": "Process",
+          "type": "string"
+        },
+        "reader_role": {
+          "default": "app",
+          "enum": [
+            "app",
+            "operator",
+            "machine"
+          ],
+          "title": "Reader Role",
+          "type": "string"
+        },
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        },
+        "ttl_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ttl Seconds"
+        }
+      },
+      "required": [
+        "process",
+        "beneficiary",
+        "ref",
+        "items"
+      ],
+      "title": "ServiceRunGrantIn",
+      "type": "object"
+    },
+    "SessionReadsIn": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/GrantItemIn"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "SessionReadsIn",
+      "type": "object"
+    },
+    "SessionReadsRead": {
+      "properties": {
+        "grants": {
+          "items": {
+            "$ref": "#/$defs/RunGrantRead"
+          },
+          "title": "Grants",
+          "type": "array"
+        },
+        "hint": {
+          "title": "Hint",
+          "type": "boolean"
+        },
+        "total": {
+          "title": "Total",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "grants",
+        "total",
+        "hint"
+      ],
+      "title": "SessionReadsRead",
       "type": "object"
     },
     "ShelfEntryRead": {
