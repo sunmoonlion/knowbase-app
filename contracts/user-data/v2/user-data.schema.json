@@ -38,6 +38,48 @@
       "title": "AccountRead",
       "type": "object"
     },
+    "AddNeedsIn": {
+      "additionalProperties": false,
+      "properties": {
+        "needs": {
+          "items": {
+            "$ref": "#/$defs/NeedSpecIn"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Needs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "needs"
+      ],
+      "title": "AddNeedsIn",
+      "type": "object"
+    },
+    "BranchRead": {
+      "description": "入口分支：ready 已经齐了（照用），supply 要交 knowfeed（带确认编号）。",
+      "properties": {
+        "branch": {
+          "enum": [
+            "ready",
+            "supply"
+          ],
+          "title": "Branch",
+          "type": "string"
+        },
+        "item_id": {
+          "title": "Item Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "branch"
+      ],
+      "title": "BranchRead",
+      "type": "object"
+    },
     "BulkUseIn": {
       "additionalProperties": false,
       "properties": {
@@ -80,6 +122,406 @@
         "done"
       ],
       "title": "BulkUseRead",
+      "type": "object"
+    },
+    "CandidateRead": {
+      "properties": {
+        "content_origin": {
+          "title": "Content Origin",
+          "type": "string"
+        },
+        "data_format": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Data Format"
+        },
+        "disclosed_on": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Disclosed On"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "rendition_kind": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rendition Kind"
+        },
+        "rendition_no": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rendition No"
+        },
+        "rendition_sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Rendition Sha256"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256",
+        "content_origin",
+        "disclosed_on",
+        "data_format",
+        "rendition_kind",
+        "rendition_no",
+        "rendition_sha256"
+      ],
+      "title": "CandidateRead",
+      "type": "object"
+    },
+    "ConfirmIn": {
+      "additionalProperties": false,
+      "description": "用户点一次。`supply` 是预切合结果与可接受的来源限制、用途条件（照存）。",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ConfirmItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "description",
+            "url",
+            "topic"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "resolution_id": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Resolution Id"
+        },
+        "revision": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Revision"
+        },
+        "supply": {
+          "additionalProperties": true,
+          "title": "Supply",
+          "type": "object"
+        },
+        "task_ref": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Ref"
+        }
+      },
+      "required": [
+        "kind",
+        "items"
+      ],
+      "title": "ConfirmIn",
+      "type": "object"
+    },
+    "ConfirmItemIn": {
+      "additionalProperties": false,
+      "description": "按描述的给 key（有清单的再给 need_key）；给网址的给 url；按主题勾的给\ncandidate_ref 与 url。",
+      "properties": {
+        "candidate_ref": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Candidate Ref"
+        },
+        "key": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DescriptionKeyModel"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
+        "need_key": {
+          "anyOf": [
+            {
+              "maxLength": 40,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Need Key"
+        },
+        "reading": {
+          "anyOf": [
+            {
+              "enum": [
+                "original",
+                "text",
+                "pages",
+                "table"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reading"
+        },
+        "required": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Required"
+        },
+        "title": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Title"
+        },
+        "url": {
+          "anyOf": [
+            {
+              "maxLength": 2000,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Url"
+        }
+      },
+      "title": "ConfirmItemIn",
+      "type": "object"
+    },
+    "ConfirmationCheckRead": {
+      "description": "knowfeed 受理前看到的：是谁、哪个应用、哪些条目、当时的供给条件。",
+      "properties": {
+        "app": {
+          "title": "App",
+          "type": "string"
+        },
+        "confirmation_id": {
+          "title": "Confirmation Id",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "needs": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Needs",
+          "type": "array"
+        },
+        "resolution_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolution Id"
+        },
+        "resolution_revision": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Resolution Revision"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "supply": {
+          "additionalProperties": true,
+          "title": "Supply",
+          "type": "object"
+        },
+        "task_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Ref"
+        }
+      },
+      "required": [
+        "confirmation_id",
+        "subject",
+        "app",
+        "kind",
+        "task_ref",
+        "resolution_id",
+        "resolution_revision",
+        "needs",
+        "items",
+        "supply",
+        "expires_at"
+      ],
+      "title": "ConfirmationCheckRead",
+      "type": "object"
+    },
+    "ConfirmationRead": {
+      "properties": {
+        "branches": {
+          "items": {
+            "$ref": "#/$defs/BranchRead"
+          },
+          "title": "Branches",
+          "type": "array"
+        },
+        "confirmation_id": {
+          "title": "Confirmation Id",
+          "type": "string"
+        },
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "additionalProperties": true,
+            "type": "object"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "confirmation_id",
+        "kind",
+        "expires_at",
+        "items",
+        "branches"
+      ],
+      "title": "ConfirmationRead",
       "type": "object"
     },
     "ConvertIn": {
@@ -207,6 +649,55 @@
         }
       },
       "title": "DescriptionIn",
+      "type": "object"
+    },
+    "DescriptionKeyModel": {
+      "additionalProperties": false,
+      "properties": {
+        "doc_type": {
+          "maxLength": 32,
+          "minLength": 1,
+          "title": "Doc Type",
+          "type": "string"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period Start"
+        },
+        "subject": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "doc_type"
+      ],
+      "title": "DescriptionKeyModel",
       "type": "object"
     },
     "DescriptionRead": {
@@ -676,6 +1167,39 @@
       "title": "LicenseIn",
       "type": "object"
     },
+    "LookupRead": {
+      "description": "只答这一份在不在、在哪个范围：shown 放开给这个应用了，held 在、没放开，\nunusable 在、不能用，absent 他名下没有。",
+      "properties": {
+        "status": {
+          "enum": [
+            "shown",
+            "held",
+            "unusable",
+            "absent"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "zone": {
+          "anyOf": [
+            {
+              "const": "own",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Zone"
+        }
+      },
+      "required": [
+        "status",
+        "zone"
+      ],
+      "title": "LookupRead",
+      "type": "object"
+    },
     "MaterialRead": {
       "properties": {
         "content_origin": {
@@ -765,6 +1289,130 @@
       "title": "MaterialRead",
       "type": "object"
     },
+    "NeedSpecIn": {
+      "additionalProperties": false,
+      "description": "声明模板里的一样：类型、期间规则、格式、份数、必填、要的读法、来源限制、\n多候选时的优先策略；口径与说明只展示。",
+      "properties": {
+        "caliber": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caliber"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Description",
+          "type": "string"
+        },
+        "doc_type": {
+          "maxLength": 32,
+          "minLength": 1,
+          "title": "Doc Type",
+          "type": "string"
+        },
+        "formats": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 6,
+          "minItems": 1,
+          "title": "Formats",
+          "type": "array"
+        },
+        "key": {
+          "pattern": "^[a-z][a-z0-9_]{0,39}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "max_count": {
+          "default": 1,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Count",
+          "type": "integer"
+        },
+        "min_count": {
+          "default": 1,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Min Count",
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "period": {
+          "$ref": "#/$defs/PeriodRuleIn"
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "enum": [
+                "public_first",
+                "upload_first",
+                "newest"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Priority"
+        },
+        "reading": {
+          "default": "original",
+          "enum": [
+            "original",
+            "text",
+            "pages",
+            "table"
+          ],
+          "title": "Reading",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "sources": {
+          "items": {
+            "enum": [
+              "disclosure",
+              "collected",
+              "upload",
+              "output"
+            ],
+            "type": "string"
+          },
+          "maxItems": 4,
+          "title": "Sources",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "name",
+        "doc_type",
+        "period",
+        "formats"
+      ],
+      "title": "NeedSpecIn",
+      "type": "object"
+    },
     "OutputWritten": {
       "properties": {
         "material_id": {
@@ -809,6 +1457,71 @@
         "version_no"
       ],
       "title": "PendingProcessingRead",
+      "type": "object"
+    },
+    "PeriodRuleIn": {
+      "additionalProperties": false,
+      "description": "固定期间（start、end），最近 N 个完整的报告期（count，可加截至任务日期已披露），\n或不限期间（none，只给不是定期报告的）。",
+      "properties": {
+        "count": {
+          "anyOf": [
+            {
+              "maximum": 10,
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Count"
+        },
+        "disclosed_by_task_date": {
+          "default": false,
+          "title": "Disclosed By Task Date",
+          "type": "boolean"
+        },
+        "end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "End"
+        },
+        "kind": {
+          "enum": [
+            "fixed",
+            "latest",
+            "none"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "start": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Start"
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "title": "PeriodRuleIn",
       "type": "object"
     },
     "PinRead": {
@@ -961,6 +1674,33 @@
         "material_id"
       ],
       "title": "PlatformItemIn",
+      "type": "object"
+    },
+    "PreferenceRead": {
+      "properties": {
+        "material_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Material Ids",
+          "type": "array"
+        },
+        "need_key": {
+          "title": "Need Key",
+          "type": "string"
+        },
+        "updated_at": {
+          "format": "date-time",
+          "title": "Updated At",
+          "type": "string"
+        }
+      },
+      "required": [
+        "need_key",
+        "material_ids",
+        "updated_at"
+      ],
+      "title": "PreferenceRead",
       "type": "object"
     },
     "ProcessingGrantIn": {
@@ -1224,6 +1964,173 @@
         "ready_at"
       ],
       "title": "RenditionRead",
+      "type": "object"
+    },
+    "ResolutionRead": {
+      "properties": {
+        "consumer": {
+          "title": "Consumer",
+          "type": "string"
+        },
+        "contract_version": {
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ResultItemRead"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "resolution_id": {
+          "title": "Resolution Id",
+          "type": "string"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        },
+        "task_ref": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Ref"
+        },
+        "vocab_version": {
+          "title": "Vocab Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "resolution_id",
+        "revision",
+        "consumer",
+        "contract_version",
+        "vocab_version",
+        "task_ref",
+        "items",
+        "created_at"
+      ],
+      "title": "ResolutionRead",
+      "type": "object"
+    },
+    "ResolveIn": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Consumer",
+          "type": "string"
+        },
+        "contract_version": {
+          "const": "knowbot-manifest/v2",
+          "title": "Contract Version",
+          "type": "string"
+        },
+        "needs": {
+          "items": {
+            "$ref": "#/$defs/NeedSpecIn"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Needs",
+          "type": "array"
+        },
+        "params": {
+          "$ref": "#/$defs/TaskParamsIn"
+        },
+        "task_ref": {
+          "anyOf": [
+            {
+              "maxLength": 255,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Ref"
+        }
+      },
+      "required": [
+        "consumer",
+        "contract_version",
+        "needs",
+        "params"
+      ],
+      "title": "ResolveIn",
+      "type": "object"
+    },
+    "ResultItemRead": {
+      "properties": {
+        "candidates": {
+          "items": {
+            "$ref": "#/$defs/CandidateRead"
+          },
+          "title": "Candidates",
+          "type": "array"
+        },
+        "chosen": {
+          "items": {
+            "$ref": "#/$defs/CandidateRead"
+          },
+          "title": "Chosen",
+          "type": "array"
+        },
+        "key": {
+          "$ref": "#/$defs/DescriptionKeyModel"
+        },
+        "need_key": {
+          "title": "Need Key",
+          "type": "string"
+        },
+        "reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Reason"
+        },
+        "status": {
+          "enum": [
+            "resolved",
+            "not_shown",
+            "to_confirm",
+            "not_collectable",
+            "ambiguous",
+            "waiting",
+            "unusable"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "need_key",
+        "key",
+        "status",
+        "chosen",
+        "candidates",
+        "reason"
+      ],
+      "title": "ResultItemRead",
       "type": "object"
     },
     "RunGrantIn": {
@@ -1770,6 +2677,58 @@
       "title": "SubscriptionScopeIn",
       "type": "object"
     },
+    "TaskParamsIn": {
+      "additionalProperties": false,
+      "description": "请专家的人发起任务时给的：主体、任务日期，必要时覆盖期间。",
+      "properties": {
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period End"
+        },
+        "period_start": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period Start"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 10,
+          "minItems": 1,
+          "title": "Subjects",
+          "type": "array"
+        },
+        "task_date": {
+          "format": "date",
+          "title": "Task Date",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subjects",
+        "task_date"
+      ],
+      "title": "TaskParamsIn",
+      "type": "object"
+    },
     "UseIn": {
       "additionalProperties": false,
       "description": "展示给 `app:knowbench` / `app:knowlab`、交给 `market`、绑给 `expert:<专家>`。",
@@ -1883,6 +2842,16 @@
             "type": "string"
           },
           "title": "Formats",
+          "type": "object"
+        },
+        "periodic": {
+          "additionalProperties": {
+            "additionalProperties": {
+              "type": "string"
+            },
+            "type": "object"
+          },
+          "title": "Periodic",
           "type": "object"
         },
         "subject_kinds": {
