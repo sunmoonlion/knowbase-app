@@ -1,0 +1,49 @@
+{
+  "doc_types": {
+    "announcement": "临时公告",
+    "annual_report": "年报",
+    "other_table": "其他表格",
+    "other_text": "其他文本",
+    "policy": "政策文件",
+    "prospectus": "招股书",
+    "q1_report": "一季报",
+    "q3_report": "三季报",
+    "semiannual_report": "半年报",
+    "statistics": "统计数据",
+    "webpage": "网页"
+  },
+  "formats": {
+    "csv": "CSV",
+    "excel": "Excel",
+    "html": "网页",
+    "markdown": "Markdown",
+    "pdf": "PDF",
+    "text": "文本"
+  },
+  "periodic": {
+    "annual_report": {
+      "deadline": "+1y 04-30",
+      "period_end": "12-31"
+    },
+    "q1_report": {
+      "deadline": "+0y 04-30",
+      "period_end": "03-31"
+    },
+    "q3_report": {
+      "deadline": "+0y 10-31",
+      "period_end": "09-30"
+    },
+    "semiannual_report": {
+      "deadline": "+0y 08-31",
+      "period_end": "06-30"
+    }
+  },
+  "subject_kinds": [
+    "cn_security",
+    "hk_security",
+    "us_security",
+    "org_credit_code",
+    "org_registered"
+  ],
+  "version": 1
+}

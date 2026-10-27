@@ -43,7 +43,7 @@
       "properties": {
         "needs": {
           "items": {
-            "$ref": "#/$defs/NeedSpecIn"
+            "$ref": "#/$defs/DataNeed"
           },
           "maxItems": 20,
           "minItems": 1,
@@ -558,6 +558,195 @@
         }
       },
       "title": "ConvertIn",
+      "type": "object"
+    },
+    "DataNeed": {
+      "additionalProperties": false,
+      "description": "声明模板里的一样：类型、期间规则、格式、份数、必填、要的读法、来源限制、\n多候选时的优先策略、表格类的表与列；口径与说明只展示。",
+      "properties": {
+        "caliber": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Caliber"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Description",
+          "type": "string"
+        },
+        "doc_type": {
+          "enum": [
+            "annual_report",
+            "semiannual_report",
+            "q1_report",
+            "q3_report",
+            "announcement",
+            "prospectus",
+            "policy",
+            "statistics",
+            "webpage",
+            "other_table",
+            "other_text"
+          ],
+          "title": "Doc Type",
+          "type": "string"
+        },
+        "formats": {
+          "items": {
+            "enum": [
+              "pdf",
+              "excel",
+              "csv",
+              "text",
+              "markdown",
+              "html"
+            ],
+            "type": "string"
+          },
+          "maxItems": 6,
+          "minItems": 1,
+          "title": "Formats",
+          "type": "array"
+        },
+        "key": {
+          "pattern": "^[a-z][a-z0-9_]{0,39}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "max_count": {
+          "default": 1,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Max Count",
+          "type": "integer"
+        },
+        "min_count": {
+          "default": 1,
+          "maximum": 200,
+          "minimum": 1,
+          "title": "Min Count",
+          "type": "integer"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "period": {
+          "$ref": "#/$defs/PeriodRule"
+        },
+        "priority": {
+          "anyOf": [
+            {
+              "enum": [
+                "public_first",
+                "upload_first",
+                "newest"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Priority"
+        },
+        "reading": {
+          "default": "original",
+          "enum": [
+            "original",
+            "text",
+            "pages",
+            "table"
+          ],
+          "title": "Reading",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "sources": {
+          "default": [],
+          "items": {
+            "enum": [
+              "disclosure",
+              "collected",
+              "upload",
+              "output"
+            ],
+            "type": "string"
+          },
+          "maxItems": 4,
+          "title": "Sources",
+          "type": "array"
+        },
+        "tables": {
+          "default": [],
+          "items": {
+            "$ref": "#/$defs/DataTable"
+          },
+          "maxItems": 20,
+          "title": "Tables",
+          "type": "array"
+        }
+      },
+      "required": [
+        "key",
+        "name",
+        "doc_type",
+        "period",
+        "formats"
+      ],
+      "title": "DataNeed",
+      "type": "object"
+    },
+    "DataTable": {
+      "additionalProperties": false,
+      "description": "表格类数据要有的一张表与几列（按表头的字认，不按位置）；CSV 不写表名。",
+      "properties": {
+        "columns": {
+          "items": {
+            "maxLength": 100,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Columns",
+          "type": "array"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        }
+      },
+      "required": [
+        "columns"
+      ],
+      "title": "DataTable",
       "type": "object"
     },
     "DescriptionIn": {
@@ -1289,130 +1478,6 @@
       "title": "MaterialRead",
       "type": "object"
     },
-    "NeedSpecIn": {
-      "additionalProperties": false,
-      "description": "声明模板里的一样：类型、期间规则、格式、份数、必填、要的读法、来源限制、\n多候选时的优先策略；口径与说明只展示。",
-      "properties": {
-        "caliber": {
-          "anyOf": [
-            {
-              "maxLength": 200,
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Caliber"
-        },
-        "description": {
-          "default": "",
-          "maxLength": 500,
-          "title": "Description",
-          "type": "string"
-        },
-        "doc_type": {
-          "maxLength": 32,
-          "minLength": 1,
-          "title": "Doc Type",
-          "type": "string"
-        },
-        "formats": {
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 6,
-          "minItems": 1,
-          "title": "Formats",
-          "type": "array"
-        },
-        "key": {
-          "pattern": "^[a-z][a-z0-9_]{0,39}$",
-          "title": "Key",
-          "type": "string"
-        },
-        "max_count": {
-          "default": 1,
-          "maximum": 200,
-          "minimum": 1,
-          "title": "Max Count",
-          "type": "integer"
-        },
-        "min_count": {
-          "default": 1,
-          "maximum": 200,
-          "minimum": 1,
-          "title": "Min Count",
-          "type": "integer"
-        },
-        "name": {
-          "maxLength": 80,
-          "minLength": 1,
-          "title": "Name",
-          "type": "string"
-        },
-        "period": {
-          "$ref": "#/$defs/PeriodRuleIn"
-        },
-        "priority": {
-          "anyOf": [
-            {
-              "enum": [
-                "public_first",
-                "upload_first",
-                "newest"
-              ],
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Priority"
-        },
-        "reading": {
-          "default": "original",
-          "enum": [
-            "original",
-            "text",
-            "pages",
-            "table"
-          ],
-          "title": "Reading",
-          "type": "string"
-        },
-        "required": {
-          "default": true,
-          "title": "Required",
-          "type": "boolean"
-        },
-        "sources": {
-          "items": {
-            "enum": [
-              "disclosure",
-              "collected",
-              "upload",
-              "output"
-            ],
-            "type": "string"
-          },
-          "maxItems": 4,
-          "title": "Sources",
-          "type": "array"
-        }
-      },
-      "required": [
-        "key",
-        "name",
-        "doc_type",
-        "period",
-        "formats"
-      ],
-      "title": "NeedSpecIn",
-      "type": "object"
-    },
     "OutputWritten": {
       "properties": {
         "material_id": {
@@ -1459,7 +1524,7 @@
       "title": "PendingProcessingRead",
       "type": "object"
     },
-    "PeriodRuleIn": {
+    "PeriodRule": {
       "additionalProperties": false,
       "description": "固定期间（start、end），最近 N 个完整的报告期（count，可加截至任务日期已披露），\n或不限期间（none，只给不是定期报告的）。",
       "properties": {
@@ -1521,7 +1586,7 @@
       "required": [
         "kind"
       ],
-      "title": "PeriodRuleIn",
+      "title": "PeriodRule",
       "type": "object"
     },
     "PinRead": {
@@ -2041,7 +2106,7 @@
         },
         "needs": {
           "items": {
-            "$ref": "#/$defs/NeedSpecIn"
+            "$ref": "#/$defs/DataNeed"
           },
           "maxItems": 20,
           "minItems": 1,

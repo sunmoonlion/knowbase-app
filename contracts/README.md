@@ -85,3 +85,36 @@ revoked or expire (decided 2026-10-25, Fable review D03). Grants keep their
 user-facing "withdraw consent" ever needs it.
 
 Breaking changes require a new major directory.
+
+## User data v4 (`user-data/v2`, SDD 0043)
+
+- Schema: `user-data/v2/user-data.schema.json`, generated from
+  `knowbase-backend/app/app/interfaces/schemas/` (`user_library.py`,
+  `user_runs.py`, `user_resolution.py`); `tests/test_user_library_contract.py`
+  keeps it byte-identical. Not released yet: it lives next to `user-data/v1`,
+  which keeps working unchanged until the apps switch over (SDD 0043 section 9).
+- All paths are under `/api/internal/v2/user-data`. Materials are no longer
+  partitioned by app: a user token's `azp` only names the app acting for the
+  user, and what an app sees is governed by the user's consent (`app:<app>`).
+
+| Caller | Authorization | What |
+| --- | --- | --- |
+| The user, via an app backend | user token | materials, versions, descriptions, licences, shelf, uses (`app:*`, `market`, `expert:*`), platform consents, subscriptions (knowfeed only), processing consent, account, run grants (delegation, session, incubation), conversion of outputs, reads log, renditions, lookup, resolutions, confirmations, preferences (read only) |
+| knowlab | `knowbase:user-data-grant-test` | test and platform run grants, ending platform processes |
+| knowlab | `knowbase:user-data-directory` | pushing the expert directory, freezing bindings at delivery |
+| knowbench, knowlab | `knowbase:user-data-output` | writing the output zone |
+| knowfeed | `knowbase:user-data-supply` | pending processing, processing grants, renditions, checking confirmations |
+| knowbench, knowlab, knowfeed | `knowbase:user-data-read` | reading by run grant, releasing grants |
+| knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding |
+
+## Data needs (`knowbot-data-needs/v2`, SDD 0043 section 3.1)
+
+- Schema: `knowbot-data-needs/v2/data-needs.schema.json`, generated from
+  `knowbase-backend/app/app/interfaces/schemas/data_needs.py`; the vocabulary it
+  draws its types and formats from is `knowbot-data-needs/v2/vocabulary.json`;
+  digests in `knowbot-data-needs/v2/contract-manifest.json`
+  (`tests/test_data_needs_contract.py` keeps all three byte-identical).
+- This is the one definition of a data need. knowlab (writing declaration
+  templates), knowmart (manifest v2) and knowbench (resolving and checking data)
+  each write the same models and pin the schema digest in a lock; a vocabulary
+  change changes the digest.
