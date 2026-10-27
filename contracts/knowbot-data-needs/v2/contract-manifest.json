@@ -8,9 +8,11 @@
     "knowbench-app"
   ],
   "vocab_version": 1,
+  "chart_version": 1,
   "files": {
     "data-needs.schema.json": "31bd1928cc7bda1c5a3576dae3f7d8317a4b44bf81c176bd198461df7049ebf2",
-    "vocabulary.json": "7af568cee56422692cb82081a51b2c2926457eed65076cc6aee6b77cf232ba2b"
+    "vocabulary.json": "7af568cee56422692cb82081a51b2c2926457eed65076cc6aee6b77cf232ba2b",
+    "chart-of-accounts.json": "0ffbbdf2e2e948a5d4bb22cacfec5c3a38c28182d256edcb13b5f792362d9f0a"
   },
   "compatibility": {
     "consumers": "same-models-locked-by-sha256",

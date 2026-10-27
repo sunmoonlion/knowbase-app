@@ -1,0 +1,981 @@
+{
+  "company_types": [
+    "general",
+    "bank",
+    "insurance",
+    "securities"
+  ],
+  "items": [
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.REVENUE",
+      "company_types": [
+        "general"
+      ],
+      "name": "营业收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.TOTAL_REVENUE",
+      "company_types": [
+        "general"
+      ],
+      "name": "营业总收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.COST",
+      "company_types": [
+        "general"
+      ],
+      "name": "营业成本",
+      "statement": "income"
+    },
+    {
+      "aliases": [
+        "营业税金及附加"
+      ],
+      "cas_element": null,
+      "code": "IS.TAXES_SURCHARGES",
+      "company_types": [
+        "general"
+      ],
+      "name": "税金及附加",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.SELLING",
+      "company_types": [
+        "general"
+      ],
+      "name": "销售费用",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.ADMIN",
+      "company_types": [
+        "general"
+      ],
+      "name": "管理费用",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.RND",
+      "company_types": [
+        "general"
+      ],
+      "name": "研发费用",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.FINANCE",
+      "company_types": [
+        "general"
+      ],
+      "name": "财务费用",
+      "statement": "income"
+    },
+    {
+      "aliases": [
+        "利息费用"
+      ],
+      "cas_element": null,
+      "code": "IS.INTEREST_EXPENSE",
+      "company_types": [
+        "general"
+      ],
+      "name": "其中：利息费用",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.INTEREST_INCOME",
+      "company_types": [
+        "general"
+      ],
+      "name": "利息收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.OTHER_INCOME",
+      "company_types": [
+        "general"
+      ],
+      "name": "其他收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.INVESTMENT_INCOME",
+      "company_types": [
+        "general"
+      ],
+      "name": "投资收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.FAIR_VALUE_CHANGE",
+      "company_types": [
+        "general"
+      ],
+      "name": "公允价值变动收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.CREDIT_IMPAIRMENT",
+      "company_types": [
+        "general"
+      ],
+      "name": "信用减值损失",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.ASSET_IMPAIRMENT",
+      "company_types": [
+        "general"
+      ],
+      "name": "资产减值损失",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.ASSET_DISPOSAL",
+      "company_types": [
+        "general"
+      ],
+      "name": "资产处置收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.NON_OPERATING_INCOME",
+      "company_types": [
+        "general"
+      ],
+      "name": "营业外收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.NON_OPERATING_EXPENSE",
+      "company_types": [
+        "general"
+      ],
+      "name": "营业外支出",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.OPERATING_PROFIT",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "营业利润",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.PROFIT_BEFORE_TAX",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "利润总额",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.INCOME_TAX",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "所得税费用",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.NET_PROFIT",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "净利润",
+      "statement": "income"
+    },
+    {
+      "aliases": [
+        "归属于母公司股东的净利润",
+        "归属于上市公司股东的净利润"
+      ],
+      "cas_element": null,
+      "code": "IS.NET_PROFIT_PARENT",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "归属于母公司所有者的净利润",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.MINORITY_PROFIT",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "少数股东损益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.EPS_BASIC",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "基本每股收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.EPS_DILUTED",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "稀释每股收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_OPERATING_INCOME",
+      "company_types": [
+        "bank"
+      ],
+      "name": "营业收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_NET_INTEREST",
+      "company_types": [
+        "bank"
+      ],
+      "name": "利息净收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_INTEREST_INCOME",
+      "company_types": [
+        "bank"
+      ],
+      "name": "利息收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_INTEREST_EXPENSE",
+      "company_types": [
+        "bank"
+      ],
+      "name": "利息支出",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_NET_FEE",
+      "company_types": [
+        "bank"
+      ],
+      "name": "手续费及佣金净收入",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_INVESTMENT_INCOME",
+      "company_types": [
+        "bank"
+      ],
+      "name": "投资收益",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_OPERATING_EXPENSE",
+      "company_types": [
+        "bank"
+      ],
+      "name": "营业支出",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_ADMIN",
+      "company_types": [
+        "bank"
+      ],
+      "name": "业务及管理费",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "IS.BANK_CREDIT_IMPAIRMENT",
+      "company_types": [
+        "bank"
+      ],
+      "name": "信用减值损失",
+      "statement": "income"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.CASH",
+      "company_types": [
+        "general"
+      ],
+      "name": "货币资金",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TRADING_FIN_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "交易性金融资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.NOTES_RECEIVABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应收票据",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.ACCOUNTS_RECEIVABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应收账款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.RECEIVABLES_FINANCING",
+      "company_types": [
+        "general"
+      ],
+      "name": "应收款项融资",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.PREPAYMENTS",
+      "company_types": [
+        "general"
+      ],
+      "name": "预付款项",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.OTHER_RECEIVABLES",
+      "company_types": [
+        "general"
+      ],
+      "name": "其他应收款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.INVENTORIES",
+      "company_types": [
+        "general"
+      ],
+      "name": "存货",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.CONTRACT_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "合同资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.OTHER_CURRENT_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "其他流动资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TOTAL_CURRENT_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "流动资产合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.LT_EQUITY_INVEST",
+      "company_types": [
+        "general"
+      ],
+      "name": "长期股权投资",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.INVESTMENT_PROPERTY",
+      "company_types": [
+        "general"
+      ],
+      "name": "投资性房地产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.FIXED_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "固定资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.CIP",
+      "company_types": [
+        "general"
+      ],
+      "name": "在建工程",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.RIGHT_OF_USE",
+      "company_types": [
+        "general"
+      ],
+      "name": "使用权资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.INTANGIBLES",
+      "company_types": [
+        "general"
+      ],
+      "name": "无形资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.GOODWILL",
+      "company_types": [
+        "general"
+      ],
+      "name": "商誉",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.DEFERRED_TAX_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "递延所得税资产",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TOTAL_NONCURRENT_ASSETS",
+      "company_types": [
+        "general"
+      ],
+      "name": "非流动资产合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.SHORT_BORROWINGS",
+      "company_types": [
+        "general"
+      ],
+      "name": "短期借款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.NOTES_PAYABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应付票据",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.ACCOUNTS_PAYABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应付账款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.ADVANCES_RECEIVED",
+      "company_types": [
+        "general"
+      ],
+      "name": "预收款项",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.CONTRACT_LIABILITIES",
+      "company_types": [
+        "general"
+      ],
+      "name": "合同负债",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.PAYROLL_PAYABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应付职工薪酬",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TAXES_PAYABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应交税费",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.OTHER_PAYABLES",
+      "company_types": [
+        "general"
+      ],
+      "name": "其他应付款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TOTAL_CURRENT_LIABILITIES",
+      "company_types": [
+        "general"
+      ],
+      "name": "流动负债合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.LT_BORROWINGS",
+      "company_types": [
+        "general"
+      ],
+      "name": "长期借款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.BONDS_PAYABLE",
+      "company_types": [
+        "general"
+      ],
+      "name": "应付债券",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.LEASE_LIABILITIES",
+      "company_types": [
+        "general"
+      ],
+      "name": "租赁负债",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TOTAL_NONCURRENT_LIABILITIES",
+      "company_types": [
+        "general"
+      ],
+      "name": "非流动负债合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [
+        "股本",
+        "实收资本"
+      ],
+      "cas_element": null,
+      "code": "BS.PAID_IN_CAPITAL",
+      "company_types": [
+        "general"
+      ],
+      "name": "实收资本（或股本）",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.CAPITAL_RESERVE",
+      "company_types": [
+        "general"
+      ],
+      "name": "资本公积",
+      "statement": "balance"
+    },
+    {
+      "aliases": [
+        "库存股"
+      ],
+      "cas_element": null,
+      "code": "BS.TREASURY_STOCK",
+      "company_types": [
+        "general"
+      ],
+      "name": "减：库存股",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.OTHER_COMPREHENSIVE_INCOME",
+      "company_types": [
+        "general"
+      ],
+      "name": "其他综合收益",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.SURPLUS_RESERVE",
+      "company_types": [
+        "general"
+      ],
+      "name": "盈余公积",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.RETAINED_EARNINGS",
+      "company_types": [
+        "general"
+      ],
+      "name": "未分配利润",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TOTAL_ASSETS",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "资产总计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.TOTAL_LIABILITIES",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "负债合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [
+        "归属于母公司股东权益合计",
+        "归属于母公司所有者权益（或股东权益）合计"
+      ],
+      "cas_element": null,
+      "code": "BS.EQUITY_PARENT",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "归属于母公司所有者权益合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.MINORITY_EQUITY",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "少数股东权益",
+      "statement": "balance"
+    },
+    {
+      "aliases": [
+        "股东权益合计",
+        "所有者权益（或股东权益）合计"
+      ],
+      "cas_element": null,
+      "code": "BS.TOTAL_EQUITY",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "所有者权益合计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [
+        "负债和股东权益总计",
+        "负债和所有者权益（或股东权益）总计"
+      ],
+      "cas_element": null,
+      "code": "BS.TOTAL_LIABILITIES_EQUITY",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "负债和所有者权益总计",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.BANK_CASH_CENTRAL",
+      "company_types": [
+        "bank"
+      ],
+      "name": "现金及存放中央银行款项",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.BANK_LOANS",
+      "company_types": [
+        "bank"
+      ],
+      "name": "发放贷款和垫款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "BS.BANK_DEPOSITS",
+      "company_types": [
+        "bank"
+      ],
+      "name": "吸收存款",
+      "statement": "balance"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.SALES_CASH",
+      "company_types": [
+        "general"
+      ],
+      "name": "销售商品、提供劳务收到的现金",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.OPERATING_INFLOW",
+      "company_types": [
+        "general"
+      ],
+      "name": "经营活动现金流入小计",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.PURCHASE_CASH",
+      "company_types": [
+        "general"
+      ],
+      "name": "购买商品、接受劳务支付的现金",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.OPERATING_OUTFLOW",
+      "company_types": [
+        "general"
+      ],
+      "name": "经营活动现金流出小计",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.CAPEX",
+      "company_types": [
+        "general"
+      ],
+      "name": "购建固定资产、无形资产和其他长期资产支付的现金",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.NET_OPERATING",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "经营活动产生的现金流量净额",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.NET_INVESTING",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "投资活动产生的现金流量净额",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.NET_FINANCING",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "筹资活动产生的现金流量净额",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.NET_CHANGE_CASH",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "现金及现金等价物净增加额",
+      "statement": "cashflow"
+    },
+    {
+      "aliases": [],
+      "cas_element": null,
+      "code": "CF.ENDING_CASH",
+      "company_types": [
+        "general",
+        "bank"
+      ],
+      "name": "期末现金及现金等价物余额",
+      "statement": "cashflow"
+    }
+  ],
+  "version": 1
+}

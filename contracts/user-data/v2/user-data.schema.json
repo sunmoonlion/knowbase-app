@@ -218,6 +218,94 @@
       "title": "CandidateRead",
       "type": "object"
     },
+    "ChartItemRead": {
+      "properties": {
+        "aliases": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Aliases",
+          "type": "array"
+        },
+        "cas_element": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Cas Element"
+        },
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "company_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Company Types",
+          "type": "array"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        },
+        "statement": {
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "name",
+        "statement",
+        "company_types",
+        "aliases",
+        "cas_element"
+      ],
+      "title": "ChartItemRead",
+      "type": "object"
+    },
+    "ChartRead": {
+      "properties": {
+        "company_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Company Types",
+          "type": "array"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/ChartItemRead"
+          },
+          "title": "Items",
+          "type": "array"
+        },
+        "metrics": {
+          "items": {
+            "$ref": "#/$defs/MetricDefinitionRead"
+          },
+          "title": "Metrics",
+          "type": "array"
+        },
+        "version": {
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version",
+        "company_types",
+        "items",
+        "metrics"
+      ],
+      "title": "ChartRead",
+      "type": "object"
+    },
     "ConfirmIn": {
       "additionalProperties": false,
       "description": "用户点一次。`supply` 是预切合结果与可接受的来源限制、用途条件（照存）。",
@@ -1063,6 +1151,334 @@
       "title": "ExpertRead",
       "type": "object"
     },
+    "FactQueryIn": {
+      "additionalProperties": false,
+      "description": "查事实；跨全市场筛选、排序、排名按第一个科目（只给一个科目时）。",
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "anyOf": [
+            {
+              "enum": [
+                "consolidated",
+                "parent"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "consolidated",
+          "title": "Consolidation"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "enum": [
+                "year",
+                "half",
+                "quarter",
+                "ytd",
+                "instant"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Labels",
+          "type": "array"
+        },
+        "layer": {
+          "default": "standard",
+          "enum": [
+            "standard",
+            "raw"
+          ],
+          "title": "Layer",
+          "type": "string"
+        },
+        "limit": {
+          "default": 500,
+          "maximum": 2000,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "order": {
+          "default": "period",
+          "enum": [
+            "period",
+            "value_desc",
+            "value_asc"
+          ],
+          "title": "Order",
+          "type": "string"
+        },
+        "period_from": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period From"
+        },
+        "period_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period To"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Subjects",
+          "type": "array"
+        },
+        "value_max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Max"
+        },
+        "value_min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Min"
+        }
+      },
+      "title": "FactQueryIn",
+      "type": "object"
+    },
+    "FactRowRead": {
+      "description": "查出来的一个数，带出处：哪份资料、哪一版、哪个表格读法版本、第几页。",
+      "properties": {
+        "code": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Code"
+        },
+        "consolidation": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Consolidation"
+        },
+        "currency": {
+          "title": "Currency",
+          "type": "string"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Duration"
+        },
+        "label": {
+          "title": "Label",
+          "type": "string"
+        },
+        "layer": {
+          "enum": [
+            "standard",
+            "raw"
+          ],
+          "title": "Layer",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "material_name": {
+          "title": "Material Name",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Page"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Period End"
+        },
+        "rendition_no": {
+          "title": "Rendition No",
+          "type": "integer"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subject"
+        },
+        "unit": {
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "subject",
+        "code",
+        "label",
+        "value",
+        "unit",
+        "currency",
+        "period_end",
+        "duration",
+        "consolidation",
+        "material_id",
+        "material_name",
+        "version_no",
+        "rendition_no",
+        "page",
+        "layer"
+      ],
+      "title": "FactRowRead",
+      "type": "object"
+    },
+    "FactsIn": {
+      "additionalProperties": false,
+      "description": "knowfeed 写回抽好的表（一批）。",
+      "properties": {
+        "processor_version": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Processor Version",
+          "type": "string"
+        },
+        "raw": {
+          "items": {
+            "$ref": "#/$defs/RawFactIn"
+          },
+          "maxItems": 20000,
+          "minItems": 1,
+          "title": "Raw",
+          "type": "array"
+        },
+        "standard": {
+          "items": {
+            "$ref": "#/$defs/StandardFactIn"
+          },
+          "maxItems": 20000,
+          "title": "Standard",
+          "type": "array"
+        }
+      },
+      "required": [
+        "processor_version",
+        "raw"
+      ],
+      "title": "FactsIn",
+      "type": "object"
+    },
     "FreezeIn": {
       "additionalProperties": false,
       "description": "交付时冻结谁的绑定（专家的作者）。",
@@ -1485,6 +1901,253 @@
         "legacy_app"
       ],
       "title": "MaterialRead",
+      "type": "object"
+    },
+    "MetricDefinitionRead": {
+      "properties": {
+        "description": {
+          "title": "Description",
+          "type": "string"
+        },
+        "key": {
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "key",
+        "name",
+        "kind",
+        "description"
+      ],
+      "title": "MetricDefinitionRead",
+      "type": "object"
+    },
+    "MetricQueryIn": {
+      "additionalProperties": false,
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "anyOf": [
+            {
+              "enum": [
+                "consolidated",
+                "parent"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "consolidated",
+          "title": "Consolidation"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "enum": [
+                "year",
+                "half",
+                "quarter",
+                "ytd",
+                "instant"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Labels",
+          "type": "array"
+        },
+        "layer": {
+          "default": "standard",
+          "enum": [
+            "standard",
+            "raw"
+          ],
+          "title": "Layer",
+          "type": "string"
+        },
+        "limit": {
+          "default": 500,
+          "maximum": 2000,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "metric": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Metric",
+          "type": "string"
+        },
+        "order": {
+          "default": "period",
+          "enum": [
+            "period",
+            "value_desc",
+            "value_asc"
+          ],
+          "title": "Order",
+          "type": "string"
+        },
+        "period_from": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period From"
+        },
+        "period_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period To"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Subjects",
+          "type": "array"
+        },
+        "value_max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Max"
+        },
+        "value_min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Min"
+        }
+      },
+      "required": [
+        "metric"
+      ],
+      "title": "MetricQueryIn",
+      "type": "object"
+    },
+    "MetricRowRead": {
+      "properties": {
+        "consolidation": {
+          "title": "Consolidation",
+          "type": "string"
+        },
+        "duration": {
+          "title": "Duration",
+          "type": "string"
+        },
+        "inputs": {
+          "items": {
+            "$ref": "#/$defs/FactRowRead"
+          },
+          "title": "Inputs",
+          "type": "array"
+        },
+        "period_end": {
+          "format": "date",
+          "title": "Period End",
+          "type": "string"
+        },
+        "subject": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Subject"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "subject",
+        "period_end",
+        "duration",
+        "consolidation",
+        "value",
+        "inputs"
+      ],
+      "title": "MetricRowRead",
       "type": "object"
     },
     "OutputWritten": {
@@ -1917,6 +2580,166 @@
       "title": "PurchaseRead",
       "type": "object"
     },
+    "RawFactIn": {
+      "additionalProperties": false,
+      "description": "原样层的一行：报表上印的样子（科目名原文、单位、页码、行序）。",
+      "properties": {
+        "cell": {
+          "anyOf": [
+            {
+              "maxLength": 20,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cell"
+        },
+        "consolidation": {
+          "anyOf": [
+            {
+              "enum": [
+                "consolidated",
+                "parent"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Consolidation"
+        },
+        "currency": {
+          "default": "CNY",
+          "maxLength": 3,
+          "minLength": 3,
+          "title": "Currency",
+          "type": "string"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "enum": [
+                "year",
+                "half",
+                "quarter",
+                "ytd",
+                "instant"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "label": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Label",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "period_end": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period End"
+        },
+        "row_no": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Row No"
+        },
+        "sheet": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Sheet"
+        },
+        "statement_label": {
+          "anyOf": [
+            {
+              "maxLength": 100,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Statement Label"
+        },
+        "unit": {
+          "maxLength": 8,
+          "minLength": 1,
+          "title": "Unit",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value"
+        }
+      },
+      "required": [
+        "label",
+        "unit"
+      ],
+      "title": "RawFactIn",
+      "type": "object"
+    },
     "ReadEventRead": {
       "properties": {
         "app": {
@@ -2298,6 +3121,173 @@
       "title": "ResultItemRead",
       "type": "object"
     },
+    "RunFactsIn": {
+      "additionalProperties": false,
+      "description": "执行的应用查这次运行钉住的那几份。",
+      "properties": {
+        "beneficiary": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Beneficiary",
+          "type": "string"
+        },
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "anyOf": [
+            {
+              "enum": [
+                "consolidated",
+                "parent"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "consolidated",
+          "title": "Consolidation"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "enum": [
+                "year",
+                "half",
+                "quarter",
+                "ytd",
+                "instant"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Labels",
+          "type": "array"
+        },
+        "layer": {
+          "default": "standard",
+          "enum": [
+            "standard",
+            "raw"
+          ],
+          "title": "Layer",
+          "type": "string"
+        },
+        "limit": {
+          "default": 500,
+          "maximum": 2000,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "order": {
+          "default": "period",
+          "enum": [
+            "period",
+            "value_desc",
+            "value_asc"
+          ],
+          "title": "Order",
+          "type": "string"
+        },
+        "period_from": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period From"
+        },
+        "period_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period To"
+        },
+        "run_ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Run Ref",
+          "type": "string"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Subjects",
+          "type": "array"
+        },
+        "value_max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Max"
+        },
+        "value_min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Min"
+        }
+      },
+      "required": [
+        "run_ref",
+        "beneficiary"
+      ],
+      "title": "RunFactsIn",
+      "type": "object"
+    },
     "RunGrantIn": {
       "additionalProperties": false,
       "description": "本人签：委托、会话（knowbench），孵化（knowlab）。\n\n同一个 ref 再签是运行中追加。",
@@ -2537,6 +3527,179 @@
       "title": "RunGrantView",
       "type": "object"
     },
+    "RunMetricIn": {
+      "additionalProperties": false,
+      "properties": {
+        "beneficiary": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Beneficiary",
+          "type": "string"
+        },
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "anyOf": [
+            {
+              "enum": [
+                "consolidated",
+                "parent"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": "consolidated",
+          "title": "Consolidation"
+        },
+        "duration": {
+          "anyOf": [
+            {
+              "enum": [
+                "year",
+                "half",
+                "quarter",
+                "ytd",
+                "instant"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Duration"
+        },
+        "labels": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Labels",
+          "type": "array"
+        },
+        "layer": {
+          "default": "standard",
+          "enum": [
+            "standard",
+            "raw"
+          ],
+          "title": "Layer",
+          "type": "string"
+        },
+        "limit": {
+          "default": 500,
+          "maximum": 2000,
+          "minimum": 1,
+          "title": "Limit",
+          "type": "integer"
+        },
+        "metric": {
+          "maxLength": 40,
+          "minLength": 1,
+          "title": "Metric",
+          "type": "string"
+        },
+        "order": {
+          "default": "period",
+          "enum": [
+            "period",
+            "value_desc",
+            "value_asc"
+          ],
+          "title": "Order",
+          "type": "string"
+        },
+        "period_from": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period From"
+        },
+        "period_to": {
+          "anyOf": [
+            {
+              "format": "date",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Period To"
+        },
+        "run_ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Run Ref",
+          "type": "string"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Subjects",
+          "type": "array"
+        },
+        "value_max": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Max"
+        },
+        "value_min": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Value Min"
+        }
+      },
+      "required": [
+        "metric",
+        "run_ref",
+        "beneficiary"
+      ],
+      "title": "RunMetricIn",
+      "type": "object"
+    },
     "ServiceRunGrantIn": {
       "additionalProperties": false,
       "description": "knowlab 签：测试（凭展示依据）、平台过程（凭 `platform:` 依据，运营或机器）。",
@@ -2652,6 +3815,100 @@
         "version"
       ],
       "title": "ShelfEntryRead",
+      "type": "object"
+    },
+    "StandardFactIn": {
+      "additionalProperties": false,
+      "description": "标准化层的一行：科目编码、换算到元的数、由原样层哪几行得来、对照规则。",
+      "properties": {
+        "code": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Code",
+          "type": "string"
+        },
+        "consolidation": {
+          "enum": [
+            "consolidated",
+            "parent"
+          ],
+          "title": "Consolidation",
+          "type": "string"
+        },
+        "currency": {
+          "default": "CNY",
+          "maxLength": 3,
+          "minLength": 3,
+          "title": "Currency",
+          "type": "string"
+        },
+        "derived_from": {
+          "items": {
+            "type": "integer"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Derived From",
+          "type": "array"
+        },
+        "duration": {
+          "enum": [
+            "year",
+            "half",
+            "quarter",
+            "ytd",
+            "instant"
+          ],
+          "title": "Duration",
+          "type": "string"
+        },
+        "page": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Page"
+        },
+        "period_end": {
+          "format": "date",
+          "title": "Period End",
+          "type": "string"
+        },
+        "rule": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Rule",
+          "type": "string"
+        },
+        "value": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "pattern": "^(?!^[-+.]*$)[+-]?0*\\d*\\.?\\d*$",
+              "type": "string"
+            }
+          ],
+          "title": "Value"
+        }
+      },
+      "required": [
+        "code",
+        "value",
+        "period_end",
+        "duration",
+        "consolidation",
+        "derived_from",
+        "rule"
+      ],
+      "title": "StandardFactIn",
       "type": "object"
     },
     "SubscriptionRead": {
