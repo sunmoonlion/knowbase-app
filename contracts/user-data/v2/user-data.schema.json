@@ -1,5 +1,87 @@
 {
   "$defs": {
+    "AccountIn": {
+      "additionalProperties": false,
+      "description": "本人第一次进 knowbase web端看过开关、点了一下：开或关都算依据。",
+      "properties": {
+        "default_display": {
+          "title": "Default Display",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "default_display"
+      ],
+      "title": "AccountIn",
+      "type": "object"
+    },
+    "AccountRead": {
+      "properties": {
+        "default_display": {
+          "title": "Default Display",
+          "type": "boolean"
+        },
+        "displays_by_default": {
+          "title": "Displays By Default",
+          "type": "boolean"
+        },
+        "seen": {
+          "title": "Seen",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "default_display",
+        "seen",
+        "displays_by_default"
+      ],
+      "title": "AccountRead",
+      "type": "object"
+    },
+    "BulkUseIn": {
+      "additionalProperties": false,
+      "properties": {
+        "material_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Material Ids",
+          "type": "array"
+        },
+        "on": {
+          "title": "On",
+          "type": "boolean"
+        },
+        "use": {
+          "maxLength": 80,
+          "minLength": 3,
+          "title": "Use",
+          "type": "string"
+        }
+      },
+      "required": [
+        "material_ids",
+        "use",
+        "on"
+      ],
+      "title": "BulkUseIn",
+      "type": "object"
+    },
+    "BulkUseRead": {
+      "properties": {
+        "done": {
+          "title": "Done",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "done"
+      ],
+      "title": "BulkUseRead",
+      "type": "object"
+    },
     "DescriptionIn": {
       "additionalProperties": false,
       "description": "本人填的描述；整份替换。`confirm` 勾了才算用户确认过（参与解析）。",
@@ -194,6 +276,72 @@
       "title": "DescriptionRead",
       "type": "object"
     },
+    "ExpertIn": {
+      "additionalProperties": false,
+      "properties": {
+        "latest_version": {
+          "anyOf": [
+            {
+              "maxLength": 32,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latest Version"
+        },
+        "name": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        }
+      },
+      "required": [
+        "owner",
+        "name"
+      ],
+      "title": "ExpertIn",
+      "type": "object"
+    },
+    "ExpertRead": {
+      "properties": {
+        "expert_id": {
+          "title": "Expert Id",
+          "type": "string"
+        },
+        "latest_version": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Latest Version"
+        },
+        "name": {
+          "title": "Name",
+          "type": "string"
+        }
+      },
+      "required": [
+        "expert_id",
+        "name",
+        "latest_version"
+      ],
+      "title": "ExpertRead",
+      "type": "object"
+    },
     "HistoryEntryRead": {
       "properties": {
         "after": {
@@ -371,6 +519,88 @@
       "title": "MaterialRead",
       "type": "object"
     },
+    "PurchaseIn": {
+      "additionalProperties": false,
+      "properties": {
+        "buyer": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Buyer",
+          "type": "string"
+        },
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "resale_allowed": {
+          "default": false,
+          "title": "Resale Allowed",
+          "type": "boolean"
+        },
+        "seller": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Seller",
+          "type": "string"
+        },
+        "transaction_ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Transaction Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seller",
+        "material_id",
+        "buyer",
+        "transaction_ref"
+      ],
+      "title": "PurchaseIn",
+      "type": "object"
+    },
+    "PurchaseRead": {
+      "properties": {
+        "buyer": {
+          "title": "Buyer",
+          "type": "string"
+        },
+        "license": {
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "version_no": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version No"
+        }
+      },
+      "required": [
+        "material_id",
+        "buyer",
+        "version_no",
+        "license"
+      ],
+      "title": "PurchaseRead",
+      "type": "object"
+    },
     "ShelfEntryRead": {
       "properties": {
         "category": {
@@ -400,6 +630,59 @@
         "version"
       ],
       "title": "ShelfEntryRead",
+      "type": "object"
+    },
+    "UseIn": {
+      "additionalProperties": false,
+      "description": "展示给 `app:knowbench` / `app:knowlab`、交给 `market`、绑给 `expert:<专家>`。",
+      "properties": {
+        "use": {
+          "maxLength": 80,
+          "minLength": 3,
+          "title": "Use",
+          "type": "string"
+        }
+      },
+      "required": [
+        "use"
+      ],
+      "title": "UseIn",
+      "type": "object"
+    },
+    "UseRead": {
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "created_via": {
+          "title": "Created Via",
+          "type": "string"
+        },
+        "use": {
+          "title": "Use",
+          "type": "string"
+        },
+        "version_no": {
+          "anyOf": [
+            {
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Version No"
+        }
+      },
+      "required": [
+        "use",
+        "created_at",
+        "created_via",
+        "version_no"
+      ],
+      "title": "UseRead",
       "type": "object"
     },
     "VersionRead": {
