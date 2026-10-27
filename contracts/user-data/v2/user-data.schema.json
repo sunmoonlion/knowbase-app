@@ -519,6 +519,73 @@
       "title": "MaterialRead",
       "type": "object"
     },
+    "PlatformConsentIn": {
+      "additionalProperties": false,
+      "description": "本人在 knowlab 选平台、交审、提交交付时确认的范围：这次过程能看哪几份。",
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/PlatformItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "kind": {
+          "enum": [
+            "incubate",
+            "test",
+            "review",
+            "rerun"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "ref": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "ref",
+        "items"
+      ],
+      "title": "PlatformConsentIn",
+      "type": "object"
+    },
+    "PlatformItemIn": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "version_no": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version No"
+        }
+      },
+      "required": [
+        "material_id"
+      ],
+      "title": "PlatformItemIn",
+      "type": "object"
+    },
     "PurchaseIn": {
       "additionalProperties": false,
       "properties": {
@@ -632,6 +699,169 @@
       "title": "ShelfEntryRead",
       "type": "object"
     },
+    "SubscriptionRead": {
+      "properties": {
+        "by": {
+          "title": "By",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "doc_types": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Doc Types",
+          "type": "array"
+        },
+        "ends_on": {
+          "format": "date",
+          "title": "Ends On",
+          "type": "string"
+        },
+        "pick_each_round": {
+          "title": "Pick Each Round",
+          "type": "boolean"
+        },
+        "purpose": {
+          "title": "Purpose",
+          "type": "string"
+        },
+        "revision": {
+          "title": "Revision",
+          "type": "integer"
+        },
+        "starts_on": {
+          "format": "date",
+          "title": "Starts On",
+          "type": "string"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Subjects",
+          "type": "array"
+        },
+        "subscription_id": {
+          "title": "Subscription Id",
+          "type": "string"
+        },
+        "topic": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Topic"
+        },
+        "urls": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Urls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "subscription_id",
+        "revision",
+        "by",
+        "starts_on",
+        "ends_on",
+        "purpose",
+        "subjects",
+        "doc_types",
+        "urls",
+        "topic",
+        "pick_each_round",
+        "created_at"
+      ],
+      "title": "SubscriptionRead",
+      "type": "object"
+    },
+    "SubscriptionScopeIn": {
+      "additionalProperties": false,
+      "description": "建订阅、续订时的长期范围同意（SDD 0045 第 2.1 节）。",
+      "properties": {
+        "by": {
+          "enum": [
+            "description",
+            "url",
+            "topic"
+          ],
+          "title": "By",
+          "type": "string"
+        },
+        "doc_types": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 11,
+          "title": "Doc Types",
+          "type": "array"
+        },
+        "ends_on": {
+          "format": "date",
+          "title": "Ends On",
+          "type": "string"
+        },
+        "purpose": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Purpose",
+          "type": "string"
+        },
+        "starts_on": {
+          "format": "date",
+          "title": "Starts On",
+          "type": "string"
+        },
+        "subjects": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "title": "Subjects",
+          "type": "array"
+        },
+        "topic": {
+          "anyOf": [
+            {
+              "maxLength": 200,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Topic"
+        },
+        "urls": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "title": "Urls",
+          "type": "array"
+        }
+      },
+      "required": [
+        "by",
+        "starts_on",
+        "ends_on",
+        "purpose"
+      ],
+      "title": "SubscriptionScopeIn",
+      "type": "object"
+    },
     "UseIn": {
       "additionalProperties": false,
       "description": "展示给 `app:knowbench` / `app:knowlab`、交给 `market`、绑给 `expert:<专家>`。",
@@ -659,6 +889,18 @@
         "created_via": {
           "title": "Created Via",
           "type": "string"
+        },
+        "material_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Material Id"
         },
         "use": {
           "title": "Use",
