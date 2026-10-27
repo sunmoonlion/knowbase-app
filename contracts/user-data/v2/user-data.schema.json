@@ -126,6 +126,11 @@
     },
     "CandidateRead": {
       "properties": {
+        "basis": {
+          "default": "display",
+          "title": "Basis",
+          "type": "string"
+        },
         "content_origin": {
           "title": "Content Origin",
           "type": "string"
@@ -1085,7 +1090,8 @@
             "frozen_binding",
             "platform",
             "processing",
-            "reference"
+            "reference",
+            "public"
           ],
           "title": "Basis",
           "type": "string"
@@ -1372,7 +1378,10 @@
         "zone": {
           "anyOf": [
             {
-              "const": "own",
+              "enum": [
+                "own",
+                "public"
+              ],
               "type": "string"
             },
             {
@@ -1797,6 +1806,35 @@
       "title": "ProcessingGrantIn",
       "type": "object"
     },
+    "PublicOriginalRead": {
+      "description": "knowfeed 交来的公开原件存下的那一份：资料、交来的那一版。",
+      "properties": {
+        "created": {
+          "title": "Created",
+          "type": "boolean"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256",
+        "created"
+      ],
+      "title": "PublicOriginalRead",
+      "type": "object"
+    },
     "PurchaseIn": {
       "additionalProperties": false,
       "properties": {
@@ -1954,6 +1992,68 @@
         "reader_role"
       ],
       "title": "ReadEventRead",
+      "type": "object"
+    },
+    "ReferenceIn": {
+      "additionalProperties": false,
+      "properties": {
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "subject",
+        "ref"
+      ],
+      "title": "ReferenceIn",
+      "type": "object"
+    },
+    "ReferencesIn": {
+      "additionalProperties": false,
+      "description": "给提了需求的用户记引用：谁、凭哪条需求依据（0045 第 2.3 节）。",
+      "properties": {
+        "references": {
+          "items": {
+            "$ref": "#/$defs/ReferenceIn"
+          },
+          "maxItems": 500,
+          "minItems": 1,
+          "title": "References",
+          "type": "array"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "version_no",
+        "references"
+      ],
+      "title": "ReferencesIn",
+      "type": "object"
+    },
+    "ReferencesRead": {
+      "properties": {
+        "recorded": {
+          "title": "Recorded",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "recorded"
+      ],
+      "title": "ReferencesRead",
       "type": "object"
     },
     "RenditionRead": {
