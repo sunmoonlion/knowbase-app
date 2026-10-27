@@ -2503,49 +2503,24 @@
       "title": "ServiceRunGrantIn",
       "type": "object"
     },
-    "SessionReadsIn": {
-      "additionalProperties": false,
+    "SessionRead": {
+      "description": "本人登记的一段会话；模型在会话里首读一份时 knowbase 凭它签小授权。",
       "properties": {
-        "items": {
-          "items": {
-            "$ref": "#/$defs/GrantItemIn"
-          },
-          "maxItems": 20,
-          "minItems": 1,
-          "title": "Items",
-          "type": "array"
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "session_id": {
+          "title": "Session Id",
+          "type": "string"
         }
       },
       "required": [
-        "items"
+        "session_id",
+        "expires_at"
       ],
-      "title": "SessionReadsIn",
-      "type": "object"
-    },
-    "SessionReadsRead": {
-      "properties": {
-        "grants": {
-          "items": {
-            "$ref": "#/$defs/RunGrantRead"
-          },
-          "title": "Grants",
-          "type": "array"
-        },
-        "hint": {
-          "title": "Hint",
-          "type": "boolean"
-        },
-        "total": {
-          "title": "Total",
-          "type": "integer"
-        }
-      },
-      "required": [
-        "grants",
-        "total",
-        "hint"
-      ],
-      "title": "SessionReadsRead",
+      "title": "SessionRead",
       "type": "object"
     },
     "ShelfEntryRead": {
