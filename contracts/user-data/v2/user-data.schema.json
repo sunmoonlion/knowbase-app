@@ -617,6 +617,73 @@
       "title": "ConfirmationRead",
       "type": "object"
     },
+    "ConfirmedRunGrantIn": {
+      "additionalProperties": false,
+      "description": "执行的应用凭本人的确认续签（等数据的委托数据齐了）：签进去的只能是那一修订\n清单里的候选，或冻结给这位专家这一版的绑定。",
+      "properties": {
+        "confirmation_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Confirmation Id",
+          "type": "string"
+        },
+        "items": {
+          "items": {
+            "$ref": "#/$defs/GrantItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        },
+        "ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Ref",
+          "type": "string"
+        },
+        "resolution_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Resolution Id",
+          "type": "string"
+        },
+        "revision": {
+          "minimum": 1,
+          "title": "Revision",
+          "type": "integer"
+        },
+        "subject": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        },
+        "ttl_seconds": {
+          "anyOf": [
+            {
+              "exclusiveMinimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ttl Seconds"
+        }
+      },
+      "required": [
+        "subject",
+        "confirmation_id",
+        "resolution_id",
+        "revision",
+        "ref",
+        "items"
+      ],
+      "title": "ConfirmedRunGrantIn",
+      "type": "object"
+    },
     "ConvertIn": {
       "additionalProperties": false,
       "description": "把一份产出转为数据；许可默认只许本人用，不得高于上游，改高要勾「我有权」。",
