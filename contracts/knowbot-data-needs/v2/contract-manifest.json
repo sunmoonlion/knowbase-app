@@ -7,11 +7,11 @@
     "knowmart-app",
     "knowbench-app"
   ],
-  "vocab_version": 1,
+  "vocab_version": 2,
   "chart_version": 1,
   "files": {
-    "data-needs.schema.json": "31bd1928cc7bda1c5a3576dae3f7d8317a4b44bf81c176bd198461df7049ebf2",
-    "vocabulary.json": "7af568cee56422692cb82081a51b2c2926457eed65076cc6aee6b77cf232ba2b",
+    "data-needs.schema.json": "f056b75a868b5670f1a9f97966198084b44c67c58f7b920159c016407ff7854c",
+    "vocabulary.json": "caf23d06f06ab34eb35a0292e2abf0f2ad977a35f71023828bd391b9db1349ca",
     "chart-of-accounts.json": "51a5611b4c7fc999e4c5cf9aae6390a5734d1f7105e36466c9059a1c24ade770"
   },
   "compatibility": {

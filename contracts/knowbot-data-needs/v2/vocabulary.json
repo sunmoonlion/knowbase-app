@@ -1,16 +1,237 @@
 {
+  "collectable": {
+    "org": [
+      "administrative_regulation",
+      "census",
+      "departmental_rule",
+      "judicial_interpretation",
+      "law",
+      "local_regulation",
+      "normative_document",
+      "policy_interpretation",
+      "statistical_bulletin",
+      "statistical_data"
+    ],
+    "security": [
+      "annual_report",
+      "interim_announcement",
+      "ir_activity",
+      "listing_announcement",
+      "prospectus",
+      "q1_report",
+      "q3_report",
+      "regulatory_letter",
+      "semiannual_report"
+    ]
+  },
+  "doc_classes": {
+    "briefing": {
+      "name": "简报",
+      "publisher": "平台"
+    },
+    "disclosure": {
+      "name": "公告",
+      "publisher": "上市公司及信披义务人"
+    },
+    "news": {
+      "name": "资讯",
+      "publisher": "媒体"
+    },
+    "other": {
+      "name": "其他",
+      "publisher": "本人上传的杂项"
+    },
+    "policy": {
+      "name": "政策法规",
+      "publisher": "政府机关与监管机构（含交易所、协会）"
+    },
+    "research": {
+      "name": "研报",
+      "publisher": "研究机构"
+    },
+    "statistics": {
+      "name": "统计数据",
+      "publisher": "统计机构"
+    }
+  },
   "doc_types": {
-    "announcement": "临时公告",
-    "annual_report": "年报",
-    "other_table": "其他表格",
-    "other_text": "其他文本",
-    "policy": "政策文件",
-    "prospectus": "招股书",
-    "q1_report": "一季报",
-    "q3_report": "三季报",
-    "semiannual_report": "半年报",
-    "statistics": "统计数据",
-    "webpage": "网页"
+    "administrative_regulation": {
+      "class": "policy",
+      "name": "行政法规"
+    },
+    "annual_report": {
+      "class": "disclosure",
+      "name": "年报"
+    },
+    "brief": {
+      "class": "briefing",
+      "name": "简报"
+    },
+    "business_rule": {
+      "class": "policy",
+      "name": "业务规则"
+    },
+    "census": {
+      "class": "statistics",
+      "name": "普查"
+    },
+    "departmental_rule": {
+      "class": "policy",
+      "name": "部门规章"
+    },
+    "financial_news": {
+      "class": "news",
+      "name": "财经资讯"
+    },
+    "interim_announcement": {
+      "class": "disclosure",
+      "name": "临时公告"
+    },
+    "ir_activity": {
+      "class": "disclosure",
+      "name": "投资者关系活动记录"
+    },
+    "ir_qa": {
+      "class": "disclosure",
+      "name": "互动问答"
+    },
+    "judicial_interpretation": {
+      "class": "policy",
+      "name": "司法解释"
+    },
+    "law": {
+      "class": "policy",
+      "name": "法律"
+    },
+    "listing_announcement": {
+      "class": "disclosure",
+      "name": "上市公告书"
+    },
+    "local_regulation": {
+      "class": "policy",
+      "name": "地方性法规"
+    },
+    "negative_news": {
+      "class": "news",
+      "name": "负面资讯"
+    },
+    "normative_document": {
+      "class": "policy",
+      "name": "规范性文件"
+    },
+    "other_table": {
+      "class": "other",
+      "name": "其他表格"
+    },
+    "other_text": {
+      "class": "other",
+      "name": "其他文本"
+    },
+    "policy_interpretation": {
+      "class": "policy",
+      "name": "政策解读"
+    },
+    "prospectus": {
+      "class": "disclosure",
+      "name": "招股书"
+    },
+    "q1_report": {
+      "class": "disclosure",
+      "name": "一季报"
+    },
+    "q3_report": {
+      "class": "disclosure",
+      "name": "三季报"
+    },
+    "recommended_news": {
+      "class": "news",
+      "name": "推荐资讯"
+    },
+    "regulatory_letter": {
+      "class": "policy",
+      "name": "监管函件"
+    },
+    "research_commodity": {
+      "class": "research",
+      "name": "商品期货"
+    },
+    "research_company": {
+      "class": "research",
+      "name": "公司研究"
+    },
+    "research_derivatives": {
+      "class": "research",
+      "name": "衍生品"
+    },
+    "research_esg": {
+      "class": "research",
+      "name": "ESG研究"
+    },
+    "research_fixed_income": {
+      "class": "research",
+      "name": "固定收益"
+    },
+    "research_fund": {
+      "class": "research",
+      "name": "基金研究"
+    },
+    "research_fx": {
+      "class": "research",
+      "name": "外汇市场"
+    },
+    "research_industry": {
+      "class": "research",
+      "name": "行业研究"
+    },
+    "research_macro": {
+      "class": "research",
+      "name": "宏观研究"
+    },
+    "research_market": {
+      "class": "research",
+      "name": "市场综述"
+    },
+    "research_morning": {
+      "class": "research",
+      "name": "晨会纪要"
+    },
+    "research_other": {
+      "class": "research",
+      "name": "其他报告"
+    },
+    "research_quant": {
+      "class": "research",
+      "name": "金融工程"
+    },
+    "research_reits": {
+      "class": "research",
+      "name": "REITs研究"
+    },
+    "research_strategy": {
+      "class": "research",
+      "name": "策略研究"
+    },
+    "semiannual_report": {
+      "class": "disclosure",
+      "name": "半年报"
+    },
+    "statistical_bulletin": {
+      "class": "statistics",
+      "name": "统计公报"
+    },
+    "statistical_data": {
+      "class": "statistics",
+      "name": "统计数据"
+    },
+    "webpage": {
+      "class": "other",
+      "name": "网页"
+    }
+  },
+  "editions": {
+    "english": "英文版",
+    "full": "全文",
+    "summary": "摘要"
   },
   "formats": {
     "csv": "CSV",
@@ -19,6 +240,42 @@
     "markdown": "Markdown",
     "pdf": "PDF",
     "text": "文本"
+  },
+  "industries": [
+    "石油石化",
+    "煤炭",
+    "有色金属",
+    "电力及公用事业",
+    "钢铁",
+    "基础化工",
+    "建筑",
+    "建材",
+    "轻工制造",
+    "机械",
+    "电力设备",
+    "国防军工",
+    "汽车",
+    "商贸零售",
+    "消费者服务",
+    "家电",
+    "纺织服装",
+    "医药",
+    "食品饮料",
+    "农林牧渔",
+    "银行",
+    "非银行金融",
+    "房地产",
+    "交通运输",
+    "电子元器件",
+    "通信",
+    "计算机",
+    "传媒",
+    "综合"
+  ],
+  "languages": {
+    "en": "英文",
+    "other": "其他",
+    "zh": "中文"
   },
   "periodic": {
     "annual_report": {
@@ -38,6 +295,38 @@
       "period_end": "06-30"
     }
   },
+  "research": {
+    "closed": {
+      "depth": {
+        "deep": "深度",
+        "regular": "一般"
+      },
+      "forecast": {
+        "estimate_change": "预测变动",
+        "initiation": "首次覆盖",
+        "rating_change": "评级变动"
+      },
+      "frequency": {
+        "daily": "日",
+        "irregular": "不定期",
+        "monthly": "月",
+        "quarterly": "季",
+        "weekly": "周",
+        "yearly": "年"
+      },
+      "market": {
+        "cn": "A股",
+        "hk": "港股",
+        "other": "其他",
+        "us": "美股"
+      }
+    },
+    "open": [
+      "institution",
+      "analysts",
+      "rating"
+    ]
+  },
   "subject_kinds": [
     "cn_security",
     "hk_security",
@@ -45,5 +334,19 @@
     "org_credit_code",
     "org_registered"
   ],
-  "version": 1
+  "topics": {
+    "dividend": "分红",
+    "equity": "股本与股东",
+    "governance": "治理",
+    "intermediary": "中介意见",
+    "ipo": "发行上市",
+    "meetings": "会议",
+    "operations": "经营与交易",
+    "refinancing": "再融资",
+    "restructuring": "重组与收购",
+    "results": "业绩",
+    "supervision": "监管",
+    "trading": "交易提示与风险"
+  },
+  "version": 2
 }
