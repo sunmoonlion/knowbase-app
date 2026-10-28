@@ -41,58 +41,13 @@ Breaking changes require a new major directory. Additive optional response
 fields remain compatible, but consumers must pin the manifest digests and run
 consumer-driven contract tests before accepting a provider release.
 
-## User data (per user x app knowledge bases, SDD 0042)
-
-- Current compatible major: `user-data/v1`
-- Schemas: `user-data/v1/user-data.schema.json` (generated from
-  `knowbase-backend/app/app/interfaces/schemas/user_data.py`; the test
-  `tests/test_user_data_contract.py` keeps them byte-identical)
-- Release manifest and digest: `user-data/v1/contract-manifest.json`
-- Provider: knowbase-app; service consumers: knowbench-app, knowlab-app, knowmart-app
-
-All paths are under `/api/internal/v1/user-data` and reachable only from inside
-the cluster. Two kinds of caller:
-
-| Caller | Authorization | Endpoints |
-| --- | --- | --- |
-| The user, via an app backend | `Bearer <user token>`: the app exchanges the user's Casdoor access token for one with `aud` = knowbase (RFC 8693); `sub` is the user, `azp` names the app partition | `POST/GET /items`, `GET /items/{id}`, `GET /items/{id}/content`, `DELETE /items/{id}`, `POST /consents`, `DELETE /consents/{id}`, `POST /grants` (delegation, session, incubation), `POST /grants/{id}/revoke` |
-| knowlab backend | service identity with `knowbase:user-data-grant-test` | `POST /test-grants`, `POST /test-grants/{id}/revoke` |
-| An app moving its own old data in (knowlab, once) | service identity with `knowbase:user-data-import`; the verified caller is the app it imports for | `POST /imports?owner=&name=&ref=` (body is the file; only into the caller's own app partition; idempotent by `ref`, same `ref` with other content is 409 `origin_ref_reused`) |
-| The reading app (knowbench workbench) | service identity with `knowbase:user-data-read`; the verified caller is the reading app | `GET /grants/{id}`, `GET /grants/{id}/items/{item}/content`, `GET /grants/{id}/items/{item}/format`, `GET /grants/{id}/items/{item}/check` (same checks as a read, no content: `{item_id, sha256}`; a reader calls it before serving anything it cached from an earlier read, and it is logged as `check`), `POST /grants/{id}/release` (hand back its own grant when the delegation or session ends; idempotent) |
-| knowmart backend | service identity with `knowbase:user-data-purchase` | `POST /purchases` |
-
-Service scopes follow the cross-app `<target>:<relation>` convention, so callers
-use the usual `KNOWBASE_INTERNAL_URL` and `KNOWBASE_<RELATION>_SERVICE_*` settings.
-knowbase checks each relation per caller, the same way knowmart does:
-`SERVICE_AUTH_<RELATION>_CALLERS` lists the callers and each caller has
-`SERVICE_AUTH_<RELATION>_<CALLER>_AUDIENCE` (its client id),
-`_SUBJECT_ALLOWLIST` and `_REQUIRED_SCOPE` (`knowbase:<relation>`); the hyphens
-in a relation become underscores (`SERVICE_AUTH_USER_DATA_READ_CALLERS`). The
-caller found this way must be knowbench, knowlab or knowmart, and reads and
-imports act for that app.
-
-Uploads send the file itself as the request body (`?name=` carries the file
-name); content responses carry `X-Content-SHA256`. Errors are the usual
-`{code, message}` bodies; codes include `item_not_found`, `grant_not_found`,
-`consent_not_found`, `in_use`, `sha256_mismatch`, `grant_inactive`,
-`format_only`, `outside_consent`, `partition_invalid`, `type_not_allowed`,
-`too_large`, `quota_exceeded`, `storage_mismatch`.
-
-Withdrawing a consent (`DELETE /consents/{id}`) only stops grants issued after it;
-grants already issued from that consent stay valid until they are handed back,
-revoked or expire (decided 2026-10-25, Fable review D03). Grants keep their
-`consent_id`, so revoking them along with the consent can be added later if a
-user-facing "withdraw consent" ever needs it.
-
-Breaking changes require a new major directory.
-
 ## User data v4 (`user-data/v2`, SDD 0043)
 
 - Schema: `user-data/v2/user-data.schema.json`, generated from
   `knowbase-backend/app/app/interfaces/schemas/` (`user_library.py`,
   `user_runs.py`, `user_resolution.py`); `tests/test_user_library_contract.py`
-  keeps it byte-identical. Not released yet: it lives next to `user-data/v1`,
-  which keeps working unchanged until the apps switch over (SDD 0043 section 9).
+  keeps it byte-identical. `user-data/v1` (per user x app partitions, SDD 0042)
+  was removed on 2026-10-28 (decisions ⑰); all apps call v2.
 - All paths are under `/api/internal/v2/user-data`. Materials are no longer
   partitioned by app: a user token's `azp` only names the app acting for the
   user, and what an app sees is governed by the user's consent (`app:<app>`).
@@ -106,6 +61,13 @@ Breaking changes require a new major directory.
 | knowfeed | `knowbase:user-data-supply` | pending processing, processing grants, renditions, checking confirmations |
 | knowbench, knowlab, knowfeed | `knowbase:user-data-read` | reading by run grant, releasing grants |
 | knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding |
+
+Service scopes follow the cross-app `<target>:<relation>` convention. knowbase
+checks each relation per caller: `SERVICE_AUTH_<RELATION>_CALLERS` lists the
+callers and each caller has `SERVICE_AUTH_<RELATION>_<CALLER>_AUDIENCE` (its
+client id), `_SUBJECT_ALLOWLIST` and `_REQUIRED_SCOPE` (`knowbase:<relation>`);
+the hyphens in a relation become underscores
+(`SERVICE_AUTH_USER_DATA_READ_CALLERS`).
 
 ## Data request (`data-request/v1`, SDD 0043 section 3.1)
 
