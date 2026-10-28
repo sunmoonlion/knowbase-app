@@ -8,11 +8,11 @@
     "knowfeed-app"
   ],
   "vocab_version": 2,
-  "chart_version": 1,
+  "chart_version": 2,
   "files": {
     "data-request.schema.json": "0d88fa592fe910db0a14286a98a3ef20728eee6b72a7c41b936971087da45ad4",
     "vocabulary.json": "caf23d06f06ab34eb35a0292e2abf0f2ad977a35f71023828bd391b9db1349ca",
-    "chart-of-accounts.json": "51a5611b4c7fc999e4c5cf9aae6390a5734d1f7105e36466c9059a1c24ade770"
+    "chart-of-accounts.json": "edfddeaa05ca6f73504a97bdc3acc0f10bf2684c7eab2f996bea0a7f94624156"
   },
   "compatibility": {
     "consumers": "same-models-locked-by-sha256",
