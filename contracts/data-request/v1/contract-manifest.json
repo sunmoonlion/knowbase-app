@@ -1,16 +1,16 @@
 {
-  "contract": "sunmoonai.knowbase.knowbot-data-needs",
-  "major": 2,
+  "contract": "sunmoonai.knowbase.data-request",
+  "major": 1,
   "provider": "knowbase-app",
   "consumers": [
+    "knowbench-app",
     "knowlab-app",
-    "knowmart-app",
-    "knowbench-app"
+    "knowfeed-app"
   ],
   "vocab_version": 2,
   "chart_version": 1,
   "files": {
-    "data-needs.schema.json": "f056b75a868b5670f1a9f97966198084b44c67c58f7b920159c016407ff7854c",
+    "data-request.schema.json": "0d88fa592fe910db0a14286a98a3ef20728eee6b72a7c41b936971087da45ad4",
     "vocabulary.json": "caf23d06f06ab34eb35a0292e2abf0f2ad977a35f71023828bd391b9db1349ca",
     "chart-of-accounts.json": "51a5611b4c7fc999e4c5cf9aae6390a5734d1f7105e36466c9059a1c24ade770"
   },

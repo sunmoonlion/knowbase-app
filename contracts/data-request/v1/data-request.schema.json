@@ -1,8 +1,8 @@
 {
   "$defs": {
-    "DataNeed": {
+    "DataRequest": {
       "additionalProperties": false,
-      "description": "声明模板里的一样：类型（细类，或只写大类）、期间规则、版本形态、格式、份数、\n必填、要的读法、来源限制、多候选时的优先策略、表格类的表与列；事项与行业写了就是\n缩小范围；口径与说明只展示。",
+      "description": "一样数据：主体（证券代码、机构编号；空是不限主体）、类型（细类，或只写大类）、\n期间规则、版本形态、格式、份数、是不是必需、要的读法、来源限制、多候选时的优先\n策略、表格类的表与列；事项与行业写了就是缩小范围；名字、说明（为什么要）、口径\n只展示。",
       "properties": {
         "caliber": {
           "anyOf": [
@@ -225,6 +225,20 @@
           "title": "Sources",
           "type": "array"
         },
+        "subject": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject"
+        },
         "tables": {
           "default": [],
           "items": {
@@ -265,7 +279,7 @@
         "period",
         "formats"
       ],
-      "title": "DataNeed",
+      "title": "DataRequest",
       "type": "object"
     },
     "DataTable": {
@@ -385,8 +399,8 @@
       "type": "object"
     }
   },
-  "$id": "https://contracts.sunmoonai.com/knowbase/knowbot-data-needs/v2/data-needs.schema.json",
-  "$ref": "#/$defs/DataNeed",
+  "$id": "https://contracts.sunmoonai.com/knowbase/data-request/v1/data-request.schema.json",
+  "$ref": "#/$defs/DataRequest",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "title": "knowbot data needs v2"
+  "title": "data request v1"
 }

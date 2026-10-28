@@ -43,7 +43,7 @@
       "properties": {
         "needs": {
           "items": {
-            "$ref": "#/$defs/DataNeed"
+            "$ref": "#/$defs/DataRequest"
           },
           "maxItems": 20,
           "minItems": 1,
@@ -735,9 +735,9 @@
       "title": "ConvertIn",
       "type": "object"
     },
-    "DataNeed": {
+    "DataRequest": {
       "additionalProperties": false,
-      "description": "声明模板里的一样：类型（细类，或只写大类）、期间规则、版本形态、格式、份数、\n必填、要的读法、来源限制、多候选时的优先策略、表格类的表与列；事项与行业写了就是\n缩小范围；口径与说明只展示。",
+      "description": "一样数据：主体（证券代码、机构编号；空是不限主体）、类型（细类，或只写大类）、\n期间规则、版本形态、格式、份数、是不是必需、要的读法、来源限制、多候选时的优先\n策略、表格类的表与列；事项与行业写了就是缩小范围；名字、说明（为什么要）、口径\n只展示。",
       "properties": {
         "caliber": {
           "anyOf": [
@@ -960,6 +960,20 @@
           "title": "Sources",
           "type": "array"
         },
+        "subject": {
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject"
+        },
         "tables": {
           "default": [],
           "items": {
@@ -1000,7 +1014,7 @@
         "period",
         "formats"
       ],
-      "title": "DataNeed",
+      "title": "DataRequest",
       "type": "object"
     },
     "DataTable": {
@@ -1265,10 +1279,18 @@
           "title": "Period Start"
         },
         "subject": {
-          "maxLength": 64,
-          "minLength": 1,
-          "title": "Subject",
-          "type": "string"
+          "anyOf": [
+            {
+              "maxLength": 64,
+              "minLength": 1,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Subject"
         },
         "topics": {
           "items": {
@@ -1294,7 +1316,6 @@
         }
       },
       "required": [
-        "subject",
         "doc_type"
       ],
       "title": "DescriptionKeyModel",
@@ -2801,16 +2822,16 @@
     },
     "PreferenceRead": {
       "properties": {
+        "key_id": {
+          "title": "Key Id",
+          "type": "string"
+        },
         "material_ids": {
           "items": {
             "type": "string"
           },
           "title": "Material Ids",
           "type": "array"
-        },
-        "need_key": {
-          "title": "Need Key",
-          "type": "string"
         },
         "updated_at": {
           "format": "date-time",
@@ -2819,7 +2840,7 @@
         }
       },
       "required": [
-        "need_key",
+        "key_id",
         "material_ids",
         "updated_at"
       ],
@@ -3409,13 +3430,13 @@
           "type": "string"
         },
         "contract_version": {
-          "const": "knowbot-manifest/v2",
+          "const": "data-request/v1",
           "title": "Contract Version",
           "type": "string"
         },
         "needs": {
           "items": {
-            "$ref": "#/$defs/DataNeed"
+            "$ref": "#/$defs/DataRequest"
           },
           "maxItems": 20,
           "minItems": 1,
@@ -4462,43 +4483,8 @@
     },
     "TaskParamsIn": {
       "additionalProperties": false,
-      "description": "请专家的人发起任务时给的：主体、任务日期，必要时覆盖期间。",
+      "description": "解析用的任务参数：只有任务日期（主体写在每一样描述上）。",
       "properties": {
-        "period_end": {
-          "anyOf": [
-            {
-              "format": "date",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Period End"
-        },
-        "period_start": {
-          "anyOf": [
-            {
-              "format": "date",
-              "type": "string"
-            },
-            {
-              "type": "null"
-            }
-          ],
-          "default": null,
-          "title": "Period Start"
-        },
-        "subjects": {
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 10,
-          "minItems": 1,
-          "title": "Subjects",
-          "type": "array"
-        },
         "task_date": {
           "format": "date",
           "title": "Task Date",
@@ -4506,7 +4492,6 @@
         }
       },
       "required": [
-        "subjects",
         "task_date"
       ],
       "title": "TaskParamsIn",

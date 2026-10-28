@@ -107,14 +107,20 @@ Breaking changes require a new major directory.
 | knowbench, knowlab, knowfeed | `knowbase:user-data-read` | reading by run grant, releasing grants |
 | knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding |
 
-## Data needs (`knowbot-data-needs/v2`, SDD 0043 section 3.1)
+## Data request (`data-request/v1`, SDD 0043 section 3.1)
 
-- Schema: `knowbot-data-needs/v2/data-needs.schema.json`, generated from
-  `knowbase-backend/app/app/interfaces/schemas/data_needs.py`; the vocabulary it
-  draws its types and formats from is `knowbot-data-needs/v2/vocabulary.json`;
-  digests in `knowbot-data-needs/v2/contract-manifest.json`
-  (`tests/test_data_needs_contract.py` keeps all three byte-identical).
-- This is the one definition of a data need. knowlab (writing declaration
-  templates), knowmart (manifest v2) and knowbench (resolving and checking data)
-  each write the same models and pin the schema digest in a lock; a vocabulary
-  change changes the digest.
+- Schema: `data-request/v1/data-request.schema.json`, generated from
+  `knowbase-backend/app/app/interfaces/schemas/data_request.py`; the vocabulary it
+  draws its types and formats from is `data-request/v1/vocabulary.json`, the chart
+  of accounts `data-request/v1/chart-of-accounts.json`; digests in
+  `data-request/v1/contract-manifest.json`
+  (`tests/test_data_request_contract.py` keeps them byte-identical).
+- This is the one definition of "one item of data a task needs": subject (or none),
+  type, period rule, edition, topics, industry, formats, counts, reading, why, and
+  whether it is essential. Since 2026-10-28 (decisions ⑭) the expert manifest no
+  longer declares data needs: step 0 of each task, run by the user's own model,
+  proposes these items from the expert's logic and the user's question, and the user
+  confirms or edits them. knowbench (tasks) and knowlab (tests) write the same models
+  and pin the schema digest in a lock; knowfeed pins the vocabulary and the chart. A
+  vocabulary change changes the digest.
+- Replaces `knowbot-data-needs/v2` (never released).
