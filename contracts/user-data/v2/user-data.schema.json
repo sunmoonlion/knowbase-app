@@ -3439,7 +3439,6 @@
             "$ref": "#/$defs/DataRequest"
           },
           "maxItems": 20,
-          "minItems": 1,
           "title": "Needs",
           "type": "array"
         },
@@ -3463,7 +3462,6 @@
       "required": [
         "consumer",
         "contract_version",
-        "needs",
         "params"
       ],
       "title": "ResolveIn",
