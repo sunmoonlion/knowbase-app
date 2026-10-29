@@ -58,9 +58,9 @@ consumer-driven contract tests before accepting a provider release.
 | knowlab | `knowbase:user-data-grant-test` | test and platform run grants, ending platform processes |
 | knowlab | `knowbase:user-data-directory` | pushing the expert directory, freezing bindings at delivery |
 | knowbench, knowlab | `knowbase:user-data-output` | writing the output zone |
-| knowfeed | `knowbase:user-data-supply` | pending processing, processing grants, renditions, checking confirmations |
+| knowfeed | `knowbase:user-data-supply` | pending processing, processing grants, renditions, checking confirmations, checking a subscription scope consent is still live before making new requests |
 | knowbench, knowlab, knowfeed | `knowbase:user-data-read` | reading by run grant, releasing grants |
-| knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding |
+| knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding; checking in bulk whether listed material is still offered (`/service/market-offers/check`, read-only) |
 
 User tokens may be acting for knowbench, knowlab, knowmart or knowfeed
 (`USER_TOKEN_APPS_JSON`). knowfeed only forwards the user's consent to a

@@ -2088,7 +2088,8 @@
         "what": {
           "enum": [
             "description",
-            "license"
+            "license",
+            "recognized"
           ],
           "title": "What",
           "type": "string"
@@ -2204,6 +2205,92 @@
         "zone"
       ],
       "title": "LookupRead",
+      "type": "object"
+    },
+    "MarketOfferItemIn": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "seller": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Seller",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seller",
+        "material_id"
+      ],
+      "title": "MarketOfferItemIn",
+      "type": "object"
+    },
+    "MarketOfferStateRead": {
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "seller": {
+          "title": "Seller",
+          "type": "string"
+        },
+        "state": {
+          "enum": [
+            "offered",
+            "not_for_sale",
+            "gone"
+          ],
+          "title": "State",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seller",
+        "material_id",
+        "state"
+      ],
+      "title": "MarketOfferStateRead",
+      "type": "object"
+    },
+    "MarketOffersIn": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/MarketOfferItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "MarketOffersIn",
+      "type": "object"
+    },
+    "MarketOffersRead": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/MarketOfferStateRead"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "MarketOffersRead",
       "type": "object"
     },
     "MaterialRead": {
