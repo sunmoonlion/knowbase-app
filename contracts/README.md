@@ -62,6 +62,24 @@ consumer-driven contract tests before accepting a provider release.
 | knowbench, knowlab, knowfeed | `knowbase:user-data-read` | reading by run grant, releasing grants |
 | knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding |
 
+User tokens may be acting for knowbench, knowlab, knowmart or knowfeed
+(`USER_TOKEN_APPS_JSON`). knowfeed only forwards the user's consent to a
+subscription's scope (SDD 0043 section 10, 0045 section 2.1): a token acting for
+knowfeed reaches `GET /subscriptions` and `PUT`/`DELETE
+/subscriptions/{id}/revisions/{n}` only, and gets 403 `user_token_app_denied`
+everywhere else.
+
+Readings written back by knowfeed are stored in knowbase's PostgreSQL (SDD 0043
+section 5): `POST /processing/grants/{grant}/renditions/text` takes UTF-8 text as
+the body, with optional `title` and `published_on` query parameters (one row per
+reading version); `.../renditions/pages` takes `[{"page": 1, "text": "..."}]`
+(pages from 1, no duplicates, empty text for a page without text; one row per
+page). A table reading is written as fact rows (`.../facts`); `.../renditions/table`
+only records a failure (`failed_reason`). A reading version's `sha256` is computed
+over the canonical content (sorted keys, compact JSON), not over the request body.
+Reading a pinned rendition by grant returns the text, or the pages in the same JSON
+shape.
+
 Service scopes follow the cross-app `<target>:<relation>` convention. knowbase
 checks each relation per caller: `SERVICE_AUTH_<RELATION>_CALLERS` lists the
 callers and each caller has `SERVICE_AUTH_<RELATION>_<CALLER>_AUDIENCE` (its
