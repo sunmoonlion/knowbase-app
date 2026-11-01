@@ -57,6 +57,157 @@
       "title": "AddNeedsIn",
       "type": "object"
     },
+    "BindingCheckItemIn": {
+      "additionalProperties": false,
+      "description": "专家绑定的一份：作者（绑的那个人）、资料、钉的那一版。",
+      "properties": {
+        "basis_ref": {
+          "anyOf": [
+            {
+              "pattern": "^expert:[A-Za-z0-9._-]{1,64}@[0-9][0-9.]{0,31}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Basis Ref"
+        },
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "owner": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Owner",
+          "type": "string"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "owner",
+        "material_id",
+        "version_no"
+      ],
+      "title": "BindingCheckItemIn",
+      "type": "object"
+    },
+    "BindingChecksIn": {
+      "additionalProperties": false,
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/BindingCheckItemIn"
+          },
+          "maxItems": 200,
+          "minItems": 1,
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "BindingChecksIn",
+      "type": "object"
+    },
+    "BindingChecksRead": {
+      "properties": {
+        "items": {
+          "items": {
+            "$ref": "#/$defs/BindingStateRead"
+          },
+          "title": "Items",
+          "type": "array"
+        }
+      },
+      "required": [
+        "items"
+      ],
+      "title": "BindingChecksRead",
+      "type": "object"
+    },
+    "BindingStateRead": {
+      "properties": {
+        "frozen_license": {
+          "anyOf": [
+            {
+              "enum": [
+                "self",
+                "via_expert",
+                "sale"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Frozen License"
+        },
+        "license": {
+          "anyOf": [
+            {
+              "enum": [
+                "self",
+                "via_expert",
+                "sale"
+              ],
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "License"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "owner": {
+          "title": "Owner",
+          "type": "string"
+        },
+        "shareable": {
+          "title": "Shareable",
+          "type": "boolean"
+        },
+        "state": {
+          "enum": [
+            "live",
+            "deleted",
+            "disabled",
+            "gone"
+          ],
+          "title": "State",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "owner",
+        "material_id",
+        "version_no",
+        "state",
+        "license",
+        "shareable"
+      ],
+      "title": "BindingStateRead",
+      "type": "object"
+    },
     "BranchRead": {
       "description": "入口分支：ready 已经齐了（照用），supply 要交 knowfeed（带确认编号）。",
       "properties": {
@@ -1880,12 +2031,101 @@
           "minLength": 1,
           "title": "Author",
           "type": "string"
+        },
+        "preview": {
+          "default": false,
+          "title": "Preview",
+          "type": "boolean"
         }
       },
       "required": [
         "author"
       ],
       "title": "FreezeIn",
+      "type": "object"
+    },
+    "FrozenBindingRead": {
+      "description": "冻结下来的一份：资料、钉在哪一版与它的摘要、凭的\n`expert:<专家>@<版本>`、交付那一刻的许可（knowlab 照它写进清单 v2 的\n`bindings`）。",
+      "properties": {
+        "basis_ref": {
+          "title": "Basis Ref",
+          "type": "string"
+        },
+        "license": {
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256",
+        "basis_ref",
+        "license"
+      ],
+      "title": "FrozenBindingRead",
+      "type": "object"
+    },
+    "FrozenLicenseIn": {
+      "additionalProperties": false,
+      "description": "自用转公开时把冻结的那一份许可往高改：作者是谁、改到哪一档、本人勾了「我有权」。",
+      "properties": {
+        "attest": {
+          "title": "Attest",
+          "type": "boolean"
+        },
+        "author": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Author",
+          "type": "string"
+        },
+        "license": {
+          "enum": [
+            "self",
+            "via_expert",
+            "sale"
+          ],
+          "title": "License",
+          "type": "string"
+        }
+      },
+      "required": [
+        "author",
+        "license",
+        "attest"
+      ],
+      "title": "FrozenLicenseIn",
+      "type": "object"
+    },
+    "FrozenVoidRead": {
+      "properties": {
+        "withdrawn": {
+          "title": "Withdrawn",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "withdrawn"
+      ],
+      "title": "FrozenVoidRead",
       "type": "object"
     },
     "GrantItemIn": {
@@ -2823,7 +3063,6 @@
             "$ref": "#/$defs/PlatformItemIn"
           },
           "maxItems": 200,
-          "minItems": 1,
           "title": "Items",
           "type": "array"
         },
@@ -2846,8 +3085,7 @@
       },
       "required": [
         "kind",
-        "ref",
-        "items"
+        "ref"
       ],
       "title": "PlatformConsentIn",
       "type": "object"
@@ -2905,6 +3143,30 @@
         "material_id"
       ],
       "title": "PlatformItemIn",
+      "type": "object"
+    },
+    "PlatformProcessRead": {
+      "description": "本人给这次平台过程留的依据：还有几份有效，0 就是撤了（或从没留过）。",
+      "properties": {
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "live": {
+          "title": "Live",
+          "type": "integer"
+        },
+        "ref": {
+          "title": "Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "ref",
+        "live"
+      ],
+      "title": "PlatformProcessRead",
       "type": "object"
     },
     "PreferenceRead": {
@@ -4210,6 +4472,19 @@
           "minItems": 1,
           "title": "Items",
           "type": "array"
+        },
+        "platform_use": {
+          "anyOf": [
+            {
+              "maxLength": 160,
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Platform Use"
         },
         "process": {
           "enum": [
