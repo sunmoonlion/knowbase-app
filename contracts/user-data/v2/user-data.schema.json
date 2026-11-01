@@ -563,6 +563,18 @@
           "default": null,
           "title": "Candidate Ref"
         },
+        "follow_links": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Follow Links"
+        },
         "key": {
           "anyOf": [
             {
@@ -2874,6 +2886,11 @@
         "material_id": {
           "title": "Material Id",
           "type": "string"
+        },
+        "provenance_basis": {
+          "additionalProperties": true,
+          "title": "Provenance Basis",
+          "type": "object"
         },
         "sha256": {
           "title": "Sha256",
