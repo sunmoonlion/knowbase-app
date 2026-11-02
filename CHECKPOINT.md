@@ -31,3 +31,12 @@
 ## 2026-11-02 同步本人重新核对路由
 
 后端 020a420 补齐 user-data/v2 用户侧 refresh，复用原服务重解析，保留 expected_revision CAS。契约 README 已记身份、修订、错误与无授权/无采集副作用。开发分支真实跨应用/数据库定向 25 passed，ruff/pyright 通过；未发布。
+
+
+## 2026-11-02 L4 格式提供方（后续增量，未部署）
+
+backend ada6ac95c5f3cc0f48a11ac184613140dfb8bf84；user-data/v2 增加
+MaterialFormatRead（精确版本与表轴），原有字段不改。本人读取须有对应应用展示与
+该版本使用权；CSV/XLSX 表轴有界，PDF/旧 xls/正文回空表轴；无原件内容跨应用传递。
+44 项首轮回归、最终相关 24 项、ruff/pyright 通过。knowbase 先于 knowlab 消费者部署；
+回退消费者后可回退提供方，不改既有数据与工作稿。qwen 正在发布的候选不更新。

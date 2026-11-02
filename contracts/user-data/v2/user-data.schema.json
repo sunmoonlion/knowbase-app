@@ -2676,6 +2676,44 @@
       "title": "MarketOffersRead",
       "type": "object"
     },
+    "MaterialFormatRead": {
+      "properties": {
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "media_type": {
+          "title": "Media Type",
+          "type": "string"
+        },
+        "sha256": {
+          "title": "Sha256",
+          "type": "string"
+        },
+        "tables": {
+          "items": {
+            "$ref": "#/$defs/TableFormatRead"
+          },
+          "maxItems": 50,
+          "title": "Tables",
+          "type": "array"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "material_id",
+        "version_no",
+        "sha256",
+        "media_type",
+        "tables"
+      ],
+      "title": "MaterialFormatRead",
+      "type": "object"
+    },
     "MaterialRead": {
       "properties": {
         "content_origin": {
@@ -5037,6 +5075,40 @@
         "purpose"
       ],
       "title": "SubscriptionScopeIn",
+      "type": "object"
+    },
+    "TableFormatRead": {
+      "properties": {
+        "columns": {
+          "items": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "maxItems": 200,
+          "title": "Columns",
+          "type": "array"
+        },
+        "name": {
+          "maxLength": 255,
+          "title": "Name",
+          "type": "string"
+        },
+        "rows": {
+          "items": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "maxItems": 500,
+          "title": "Rows",
+          "type": "array"
+        }
+      },
+      "required": [
+        "name",
+        "columns",
+        "rows"
+      ],
+      "title": "TableFormatRead",
       "type": "object"
     },
     "TaskParamsIn": {
