@@ -130,3 +130,14 @@ the hyphens in a relation become underscores
   and pin the schema digest in a lock; knowfeed pins the vocabulary and the chart. A
   vocabulary change changes the digest.
 - Replaces `knowbot-data-needs/v2` (never released).
+
+## Confirmation versus collection progress
+
+A user-data confirmation is an authorization snapshot with a seven-day validity,
+not proof that a supply job was submitted or remains active. Resolution returns
+`to_confirm` while the requested material/reading is absent; it must not infer
+`waiting` from another task's unexpired confirmation. The consuming application
+tracks its own demand ID and polls Knowfeed for actual progress. Existing
+confirmations remain valid for authorized admission and grant renewal; this fix
+does not delete confirmation records or change the wire schema. Legacy stored
+`waiting` results should be refreshed before a new task proceeds.
