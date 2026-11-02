@@ -60,6 +60,15 @@ are unchanged; private copies must not share another beneficiary's processing gr
   partitioned by app: a user token's `azp` only names the app acting for the
   user, and what an app sees is governed by the user's consent (`app:<app>`).
 
+Resolution append, replacement and refresh commit only against the revision read before
+resolving. If another write wins, the provider returns HTTP 409 `resolution_changed`
+without creating a revision or overwriting the winner. Callers must reload before
+retrying; this is not a completed proposal or a confirmation. Request/response schemas
+are unchanged: the expected base revision is an internal repository condition, not a
+new client field. This guards overlapping resolution work, not a user's edits based on
+an old page after the other write has already finished. It also does not make a timed-out
+append idempotent: replaying an existing need key still returns `need_key_taken`.
+
 | Caller | Authorization | What |
 | --- | --- | --- |
 | The user, via an app backend | user token | materials, versions, descriptions, licences, shelf, uses (`app:*`, `market`, `expert:*`), platform consents (items may be empty: an account-level consent to the process), subscriptions (knowfeed only), processing consent, account, run grants (delegation, session, incubation), conversion of outputs, reads log, renditions, lookup, resolutions, confirmations, preferences (read only) |
