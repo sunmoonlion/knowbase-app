@@ -31,3 +31,9 @@
 ## 2026-11-02 同步本人重新核对路由
 
 后端 020a420 补齐 user-data/v2 用户侧 refresh，复用原服务重解析，保留 expected_revision CAS。契约 README 已记身份、修订、错误与无授权/无采集副作用。开发分支真实跨应用/数据库定向 25 passed，ruff/pyright 通过；未发布。
+
+
+## 2026-11-03 #58 后采集等待与 PDF 正文修复候选
+
+仅更新 backend 至 45f703a7bac0213b66ff67a6b9ca4fd4a2a93afd；web/admin/其它契约锁保持 #58。
+说明与验证见子仓 CHECKPOINT 及统一发版交接第11节。没有自动重跑旧任务/旧采单。
