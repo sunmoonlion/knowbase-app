@@ -62,6 +62,15 @@ consumer-driven contract tests before accepting a provider release.
 | knowbench, knowlab, knowfeed | `knowbase:user-data-read` | reading by run grant, releasing grants |
 | knowmart | `knowbase:user-data-purchase` | recording a purchase as a holding; checking in bulk whether listed material is still offered (`/service/market-offers/check`, read-only); checking an expert's bindings when a manifest arrives and in the periodic sweep (`/service/expert-bindings/check`, read-only: per item `live` / `deleted` / `disabled` / `gone`, the author's licence, the frozen licence when `basis_ref` is given, and `shareable` = live and at least `via_expert`, the frozen licence included; SDD 0043 section 4.3) |
 
+The user-token `POST /resolutions/{id}/refresh` rechecks a resolution owned by
+both the authenticated subject and the acting app (knowbench or knowlab). It
+uses the same resolver as the service-token `/service/resolutions/{id}/refresh`:
+settled selections stay pinned, unmet needs are checked again, and unchanged
+results return the current revision. It neither confirms a list nor grants or
+collects data. An unknown or differently owned resolution returns 404
+`resolution_not_found`; a missing HTTP route is an infrastructure failure, not
+an invalid user choice. The response remains `ResolutionRead` in `user-data/v2`.
+
 User tokens may be acting for knowbench, knowlab, knowmart or knowfeed
 (`USER_TOKEN_APPS_JSON`). knowfeed only forwards the user's consent to a
 subscription's scope (SDD 0043 section 10, 0045 section 2.1): a token acting for
