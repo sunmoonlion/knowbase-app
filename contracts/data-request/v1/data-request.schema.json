@@ -210,6 +210,17 @@
           "title": "Required",
           "type": "boolean"
         },
+        "source_query": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceQuery"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "sources": {
           "default": [],
           "items": {
@@ -318,6 +329,7 @@
       "title": "DataTable",
       "type": "object"
     },
+    "JsonValue": {},
     "PeriodRule": {
       "additionalProperties": false,
       "description": "固定期间（start、end）；定期报告最近 N 个完整的报告期（latest + count，\n可加截至任务日期已披露）；其余类型最近 N 个月内披露的（recent + months），\n或不限期间（none）。定期报告的期间是报告期，其余类型的期间是披露时间窗\n（SDD 0049）。",
@@ -396,6 +408,56 @@
         "kind"
       ],
       "title": "PeriodRule",
+      "type": "object"
+    },
+    "SourceQuery": {
+      "additionalProperties": false,
+      "description": "Confirmed query against a registered supplier; credentials never travel here.",
+      "properties": {
+        "arguments": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "maxProperties": 50,
+          "title": "Arguments",
+          "type": "object"
+        },
+        "channel": {
+          "pattern": "^[a-z][a-z0-9-]{1,39}$",
+          "title": "Channel",
+          "type": "string"
+        },
+        "request_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{32}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Id"
+        },
+        "service": {
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "title": "Service",
+          "type": "string"
+        },
+        "tool": {
+          "pattern": "^[a-z][a-z0-9_]{0,99}$",
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "channel",
+        "service",
+        "tool",
+        "arguments"
+      ],
+      "title": "SourceQuery",
       "type": "object"
     }
   },

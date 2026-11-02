@@ -1216,6 +1216,17 @@
           "title": "Required",
           "type": "boolean"
         },
+        "source_query": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceQuery"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
+        },
         "sources": {
           "default": [],
           "items": {
@@ -1548,6 +1559,17 @@
           ],
           "default": null,
           "title": "Period Start"
+        },
+        "source_query": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/SourceQuery"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null
         },
         "subject": {
           "anyOf": [
@@ -2507,6 +2529,7 @@
       "title": "HoldingRead",
       "type": "object"
     },
+    "JsonValue": {},
     "LicenseIn": {
       "additionalProperties": false,
       "properties": {
@@ -4707,6 +4730,56 @@
         "version"
       ],
       "title": "ShelfEntryRead",
+      "type": "object"
+    },
+    "SourceQuery": {
+      "additionalProperties": false,
+      "description": "Confirmed query against a registered supplier; credentials never travel here.",
+      "properties": {
+        "arguments": {
+          "additionalProperties": {
+            "$ref": "#/$defs/JsonValue"
+          },
+          "maxProperties": 50,
+          "title": "Arguments",
+          "type": "object"
+        },
+        "channel": {
+          "pattern": "^[a-z][a-z0-9-]{1,39}$",
+          "title": "Channel",
+          "type": "string"
+        },
+        "request_id": {
+          "anyOf": [
+            {
+              "pattern": "^[a-f0-9]{32}$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Request Id"
+        },
+        "service": {
+          "pattern": "^[a-z][a-z0-9_]{0,63}$",
+          "title": "Service",
+          "type": "string"
+        },
+        "tool": {
+          "pattern": "^[a-z][a-z0-9_]{0,99}$",
+          "title": "Tool",
+          "type": "string"
+        }
+      },
+      "required": [
+        "channel",
+        "service",
+        "tool",
+        "arguments"
+      ],
+      "title": "SourceQuery",
       "type": "object"
     },
     "StandardFactIn": {
