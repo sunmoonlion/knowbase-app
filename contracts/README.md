@@ -43,6 +43,14 @@ consumer-driven contract tests before accepting a provider release.
 
 ## User data v4 (`user-data/v2`, SDD 0043)
 
+Collected-original delivery returns additive `readings` and `renditions` fields:
+only ready kinds and their latest ready rendition number, digest and processor version,
+scoped to each beneficiary's material/content version. `has_readings` retains its legacy
+meaning (at least one ready kind); it never proves all requested kinds are ready.
+New consumers process missing kinds per beneficiary and conservatively reprocess requested
+kinds when talking to an older provider without the list. Existing request fields and paths
+are unchanged; private copies must not share another beneficiary's processing grant.
+
 - Schema: `user-data/v2/user-data.schema.json`, generated from
   `knowbase-backend/app/app/interfaces/schemas/` (`user_library.py`,
   `user_runs.py`, `user_resolution.py`); `tests/test_user_library_contract.py`

@@ -5,10 +5,11 @@
   "service_consumers": [
     "knowbench-app",
     "knowlab-app",
-    "knowmart-app"
+    "knowmart-app",
+    "knowfeed-app"
   ],
   "files": {
-    "user-data.schema.json": "3a41f43ebffcb550803c05b1b21d7c847d46b739758ccd5bb395b3dcf1a9749f"
+    "user-data.schema.json": "73f21cef8abfd2d3911b72bfbb9bfad1e0fa863391616163737048debeea794d"
   },
   "compatibility": {
     "requests": "exact-fields-v2",

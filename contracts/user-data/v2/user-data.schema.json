@@ -472,6 +472,114 @@
       "title": "ChartRead",
       "type": "object"
     },
+    "CollectedOriginalRead": {
+      "properties": {
+        "created": {
+          "title": "Created",
+          "type": "boolean"
+        },
+        "has_readings": {
+          "default": false,
+          "title": "Has Readings",
+          "type": "boolean"
+        },
+        "item_ref": {
+          "title": "Item Ref",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "readings": {
+          "items": {
+            "enum": [
+              "text",
+              "pages",
+              "table",
+              "index",
+              "parse"
+            ],
+            "type": "string"
+          },
+          "title": "Readings",
+          "type": "array"
+        },
+        "renditions": {
+          "items": {
+            "$ref": "#/$defs/CollectedRenditionRead"
+          },
+          "title": "Renditions",
+          "type": "array"
+        },
+        "subject": {
+          "title": "Subject",
+          "type": "string"
+        },
+        "version_no": {
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "subject",
+        "item_ref",
+        "material_id",
+        "version_no",
+        "created"
+      ],
+      "title": "CollectedOriginalRead",
+      "type": "object"
+    },
+    "CollectedRenditionRead": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "text",
+            "pages",
+            "table",
+            "index",
+            "parse"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "processor": {
+          "title": "Processor",
+          "type": "string"
+        },
+        "processor_version": {
+          "title": "Processor Version",
+          "type": "string"
+        },
+        "rendition_no": {
+          "minimum": 1,
+          "title": "Rendition No",
+          "type": "integer"
+        },
+        "sha256": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Sha256"
+        }
+      },
+      "required": [
+        "kind",
+        "rendition_no",
+        "sha256",
+        "processor",
+        "processor_version"
+      ],
+      "title": "CollectedRenditionRead",
+      "type": "object"
+    },
     "ConfirmIn": {
       "additionalProperties": false,
       "description": "用户点一次。`supply` 是预切合结果与可接受的来源限制、用途条件（照存）。",
