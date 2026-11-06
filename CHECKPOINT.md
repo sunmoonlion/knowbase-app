@@ -46,3 +46,7 @@ MaterialFormatRead（精确版本与表轴），原有字段不改。本人读�
 backend b041a2a 去掉确认有效期冒充采集状态的推断；确认不删除，续签与读法核验保留。
 21 项隔离 DB 回归与静态检查通过。#58 独立发布候选另在
 fix/supply-confirmation-waiting，不将本工位未发布格式增量混入故障补丁。
+## 2026-11-03 #58 后采集等待与 PDF 正文修复候选
+
+仅更新 backend 至 45f703a7bac0213b66ff67a6b9ca4fd4a2a93afd；web/admin/其它契约锁保持 #58。
+说明与验证见子仓 CHECKPOINT 及统一发版交接第11节。没有自动重跑旧任务/旧采单。
