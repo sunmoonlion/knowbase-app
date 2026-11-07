@@ -10,7 +10,7 @@
   "vocab_version": 2,
   "chart_version": 2,
   "files": {
-    "data-request.schema.json": "0915d863e5fa6045359fe80fd6898d01db1390f7db8d5db9e8954cfb357104a2",
+    "data-request.schema.json": "787d87506a473681da47ec48e8e38f1f25cd9b4dc220df924809f13636bd7281",
     "vocabulary.json": "caf23d06f06ab34eb35a0292e2abf0f2ad977a35f71023828bd391b9db1349ca",
     "chart-of-accounts.json": "edfddeaa05ca6f73504a97bdc3acc0f10bf2684c7eab2f996bea0a7f94624156"
   },

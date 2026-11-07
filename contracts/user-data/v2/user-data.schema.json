@@ -43,7 +43,14 @@
       "properties": {
         "needs": {
           "items": {
-            "$ref": "#/$defs/DataRequest"
+            "anyOf": [
+              {
+                "$ref": "#/$defs/DataRequest"
+              },
+              {
+                "$ref": "#/$defs/FactRequest"
+              }
+            ]
           },
           "maxItems": 20,
           "minItems": 1,
@@ -689,10 +696,14 @@
               "$ref": "#/$defs/DescriptionKeyModel"
             },
             {
+              "$ref": "#/$defs/FactKeyModel"
+            },
+            {
               "type": "null"
             }
           ],
-          "default": null
+          "default": null,
+          "title": "Key"
         },
         "need_key": {
           "anyOf": [
@@ -1836,6 +1847,75 @@
       "title": "ExpertRead",
       "type": "object"
     },
+    "FactKeyModel": {
+      "additionalProperties": false,
+      "description": "「要哪些数」展开出的一条：这家公司这一期这几个科目、这个口径（SDD 0051）。",
+      "properties": {
+        "codes": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 30,
+          "minItems": 1,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "default": "consolidated",
+          "enum": [
+            "consolidated",
+            "parent"
+          ],
+          "title": "Consolidation",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "first",
+          "enum": [
+            "first",
+            "latest"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "duration": {
+          "default": "year",
+          "enum": [
+            "year",
+            "half",
+            "quarter",
+            "ytd",
+            "instant"
+          ],
+          "title": "Duration",
+          "type": "string"
+        },
+        "kind": {
+          "const": "facts",
+          "title": "Kind",
+          "type": "string"
+        },
+        "period_end": {
+          "format": "date",
+          "title": "Period End",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "subject",
+        "period_end",
+        "codes"
+      ],
+      "title": "FactKeyModel",
+      "type": "object"
+    },
     "FactQueryIn": {
       "additionalProperties": false,
       "description": "查事实；跨全市场筛选、排序、排名按第一个科目（只给一个科目时）。",
@@ -1985,6 +2065,106 @@
         }
       },
       "title": "FactQueryIn",
+      "type": "object"
+    },
+    "FactRequest": {
+      "additionalProperties": false,
+      "description": "要哪些数（SDD 0051 第 2.1 节，所有者 2026-11-07）：主体、期间、科目表编码、口径。\n\n只说要什么，不写渠道、不写怎么取（「需求不能决定取法，到了供给端才分」）。科目编码\n来自契约里的科目表（`chart-of-accounts.json`）；披露版本不写时取当期原始披露。\nknowbase 先在标准化层里找，没有的交 knowfeed 按渠道先后去取。",
+      "properties": {
+        "codes": {
+          "items": {
+            "pattern": "^[A-Z]{2}\\.[A-Z0-9_]{1,60}$",
+            "type": "string"
+          },
+          "maxItems": 30,
+          "minItems": 1,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "default": "consolidated",
+          "enum": [
+            "consolidated",
+            "parent"
+          ],
+          "title": "Consolidation",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Description",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "first",
+          "enum": [
+            "first",
+            "latest"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "duration": {
+          "default": "year",
+          "enum": [
+            "year",
+            "half",
+            "quarter",
+            "ytd",
+            "instant"
+          ],
+          "title": "Duration",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z][a-z0-9_]{0,39}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "const": "facts",
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "name",
+        "subject",
+        "start",
+        "end",
+        "codes"
+      ],
+      "title": "FactRequest",
       "type": "object"
     },
     "FactRowRead": {
@@ -3971,7 +4151,14 @@
         },
         "needs": {
           "items": {
-            "$ref": "#/$defs/DataRequest"
+            "anyOf": [
+              {
+                "$ref": "#/$defs/DataRequest"
+              },
+              {
+                "$ref": "#/$defs/FactRequest"
+              }
+            ]
           },
           "maxItems": 20,
           "title": "Needs",
@@ -4019,7 +4206,15 @@
           "type": "array"
         },
         "key": {
-          "$ref": "#/$defs/DescriptionKeyModel"
+          "anyOf": [
+            {
+              "$ref": "#/$defs/DescriptionKeyModel"
+            },
+            {
+              "$ref": "#/$defs/FactKeyModel"
+            }
+          ],
+          "title": "Key"
         },
         "need_key": {
           "title": "Need Key",

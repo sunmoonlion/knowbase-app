@@ -329,6 +329,106 @@
       "title": "DataTable",
       "type": "object"
     },
+    "FactRequest": {
+      "additionalProperties": false,
+      "description": "要哪些数（SDD 0051 第 2.1 节，所有者 2026-11-07）：主体、期间、科目表编码、口径。\n\n只说要什么，不写渠道、不写怎么取（「需求不能决定取法，到了供给端才分」）。科目编码\n来自契约里的科目表（`chart-of-accounts.json`）；披露版本不写时取当期原始披露。\nknowbase 先在标准化层里找，没有的交 knowfeed 按渠道先后去取。",
+      "properties": {
+        "codes": {
+          "items": {
+            "pattern": "^[A-Z]{2}\\.[A-Z0-9_]{1,60}$",
+            "type": "string"
+          },
+          "maxItems": 30,
+          "minItems": 1,
+          "title": "Codes",
+          "type": "array"
+        },
+        "consolidation": {
+          "default": "consolidated",
+          "enum": [
+            "consolidated",
+            "parent"
+          ],
+          "title": "Consolidation",
+          "type": "string"
+        },
+        "description": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Description",
+          "type": "string"
+        },
+        "disclosure": {
+          "default": "first",
+          "enum": [
+            "first",
+            "latest"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
+        "duration": {
+          "default": "year",
+          "enum": [
+            "year",
+            "half",
+            "quarter",
+            "ytd",
+            "instant"
+          ],
+          "title": "Duration",
+          "type": "string"
+        },
+        "end": {
+          "format": "date",
+          "title": "End",
+          "type": "string"
+        },
+        "key": {
+          "pattern": "^[a-z][a-z0-9_]{0,39}$",
+          "title": "Key",
+          "type": "string"
+        },
+        "kind": {
+          "const": "facts",
+          "title": "Kind",
+          "type": "string"
+        },
+        "name": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Name",
+          "type": "string"
+        },
+        "required": {
+          "default": true,
+          "title": "Required",
+          "type": "boolean"
+        },
+        "start": {
+          "format": "date",
+          "title": "Start",
+          "type": "string"
+        },
+        "subject": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Subject",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "key",
+        "name",
+        "subject",
+        "start",
+        "end",
+        "codes"
+      ],
+      "title": "FactRequest",
+      "type": "object"
+    },
     "JsonValue": {},
     "PeriodRule": {
       "additionalProperties": false,
@@ -462,7 +562,14 @@
     }
   },
   "$id": "https://contracts.sunmoonai.com/knowbase/data-request/v1/data-request.schema.json",
-  "$ref": "#/$defs/DataRequest",
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "oneOf": [
+    {
+      "$ref": "#/$defs/DataRequest"
+    },
+    {
+      "$ref": "#/$defs/FactRequest"
+    }
+  ],
   "title": "data request v1"
 }
