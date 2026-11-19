@@ -2983,6 +2983,135 @@
       "title": "MaterialRead",
       "type": "object"
     },
+    "MethodNode": {
+      "additionalProperties": false,
+      "properties": {
+        "call_id": {
+          "format": "uuid",
+          "title": "Call Id",
+          "type": "string"
+        },
+        "definition_digest": {
+          "pattern": "^sha256:[0-9a-f]{64}$",
+          "title": "Definition Digest",
+          "type": "string"
+        },
+        "method_id": {
+          "format": "uuid",
+          "title": "Method Id",
+          "type": "string"
+        },
+        "version": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Version"
+        }
+      },
+      "required": [
+        "call_id",
+        "method_id",
+        "definition_digest"
+      ],
+      "title": "MethodNode",
+      "type": "object"
+    },
+    "MethodParentRequest": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "read": {
+          "$ref": "#/$defs/MethodRead"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "read",
+        "expires_at",
+        "sha256"
+      ],
+      "title": "MethodParentRequest",
+      "type": "object"
+    },
+    "MethodRead": {
+      "additionalProperties": false,
+      "properties": {
+        "material_id": {
+          "format": "uuid",
+          "title": "Material Id",
+          "type": "string"
+        },
+        "path": {
+          "items": {
+            "$ref": "#/$defs/MethodNode"
+          },
+          "maxItems": 16,
+          "minItems": 1,
+          "title": "Path",
+          "type": "array"
+        },
+        "purpose": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Purpose",
+          "type": "string"
+        },
+        "task_id": {
+          "format": "uuid",
+          "title": "Task Id",
+          "type": "string"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "task_id",
+        "path",
+        "purpose",
+        "material_id",
+        "version_no"
+      ],
+      "title": "MethodRead",
+      "type": "object"
+    },
+    "MethodReadConsent": {
+      "additionalProperties": false,
+      "properties": {
+        "expires_at": {
+          "format": "date-time",
+          "title": "Expires At",
+          "type": "string"
+        },
+        "read": {
+          "$ref": "#/$defs/MethodRead"
+        }
+      },
+      "required": [
+        "read",
+        "expires_at"
+      ],
+      "title": "MethodReadConsent",
+      "type": "object"
+    },
     "MetricDefinitionRead": {
       "properties": {
         "description": {

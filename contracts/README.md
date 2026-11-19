@@ -141,3 +141,9 @@ tracks its own demand ID and polls Knowfeed for actual progress. Existing
 confirmations remain valid for authorized admission and grant renewal; this fix
 does not delete confirmation records or change the wire schema. Legacy stored
 `waiting` results should be refreshed before a new task proceeds.
+
+### KnowBench formal-method reads (`user-data/v2`)
+
+An authenticated material owner using KnowBench can post a `MethodParentRequest` to `/method-parent-grants` to pin one task, original version, SHA-256 and expiry. This grants access exclusively through an approved method invocation. To reuse an existing owner-issued delegation, its reference must be bound to the same formal task. An owner posts `MethodReadConsent` to `/run-grants/{grant_id}/method-read-consents` and can revoke it with DELETE at the same path followed by `/{method_call_id}`. The parent and leaf grants must both be active when the bytes are released.
+
+The data MCP tool `read_method_input` takes `material_id` and `version_no`. The short-lived KnowBench token must name only this tool and sign the task, exact method invocation path, purpose and pinned input. Its structured result contains `text` and a `source` receipt with `material_id`, `version_no`, full `sha256`, `grant_id` and `method_call_id`. This operation supports a displayed, owner-held UTF-8 text original up to 16,000 bytes.

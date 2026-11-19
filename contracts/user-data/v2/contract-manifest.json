@@ -9,7 +9,7 @@
     "knowfeed-app"
   ],
   "files": {
-    "user-data.schema.json": "c527ce32ded40c836b402d99be34459383ccf6625e3519ab7090e7651ddd9c8e"
+    "user-data.schema.json": "e7b51c19b536d3f4557e46a2db8724d477edf16a398d988b9d8b3a5b9b9b04dd"
   },
   "compatibility": {
     "requests": "exact-fields-v2",
