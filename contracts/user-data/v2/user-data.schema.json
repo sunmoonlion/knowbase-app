@@ -587,6 +587,77 @@
       "title": "CollectedRenditionRead",
       "type": "object"
     },
+    "ColumnCheckIn": {
+      "properties": {
+        "column": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Column",
+          "type": "string"
+        },
+        "sheet": {
+          "maxLength": 255,
+          "title": "Sheet",
+          "type": "string"
+        }
+      },
+      "required": [
+        "sheet",
+        "column"
+      ],
+      "title": "ColumnCheckIn",
+      "type": "object"
+    },
+    "ColumnCheckRead": {
+      "properties": {
+        "column": {
+          "maxLength": 200,
+          "minLength": 1,
+          "pattern": "\\S",
+          "title": "Column",
+          "type": "string"
+        },
+        "material_id": {
+          "title": "Material Id",
+          "type": "string"
+        },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
+        "sheet": {
+          "maxLength": 255,
+          "title": "Sheet",
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "present",
+            "missing",
+            "unknown"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "version_no": {
+          "minimum": 1,
+          "title": "Version No",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "sheet",
+        "column",
+        "material_id",
+        "version_no",
+        "sha256",
+        "status"
+      ],
+      "title": "ColumnCheckRead",
+      "type": "object"
+    },
     "ConfirmIn": {
       "additionalProperties": false,
       "description": "用户点一次。`supply` 是预切合结果与可接受的来源限制、用途条件（照存）。",
