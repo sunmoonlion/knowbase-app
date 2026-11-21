@@ -1,0 +1,8 @@
+{
+  "provider": "knowbench",
+  "version": 1,
+  "sha256": {
+    "service-function-publication-v1.json": "7b76aa83251095476f892af770e99075c722a9cddea138b305a6339ef870c0fc",
+    "service-function-revision-v1.json": "2ba26156b8aff1ebef6e1a60476a8608a0714c4ce7a199604e5fcb5dfba23932"
+  }
+}
