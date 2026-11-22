@@ -106,6 +106,13 @@ over the canonical content (sorted keys, compact JSON), not over the request bod
 Reading a pinned rendition by grant returns the text, or the pages in the same JSON
 shape.
 
+KnowBench uses `GET /outputs/available` with the existing output-service identity and
+the original beneficiary, task ref, run ref and filename to check a previously
+released output. It returns the exact material ID, version and hash only while the
+output is live and the beneficiary still holds that version. `GET /outputs/lookup`
+returns the original write receipt for idempotent recovery. To use a released
+output as a method input the owner converts it to data and confirms its use.
+
 Service scopes follow the cross-app `<target>:<relation>` convention. knowbase
 checks each relation per caller: `SERVICE_AUTH_<RELATION>_CALLERS` lists the
 callers and each caller has `SERVICE_AUTH_<RELATION>_<CALLER>_AUDIENCE` (its
