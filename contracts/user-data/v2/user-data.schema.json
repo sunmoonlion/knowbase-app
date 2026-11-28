@@ -3949,6 +3949,11 @@
           "title": "Material Id",
           "type": "string"
         },
+        "sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "title": "Sha256",
+          "type": "string"
+        },
         "version_no": {
           "anyOf": [
             {
@@ -3962,6 +3967,7 @@
         }
       },
       "required": [
+        "sha256",
         "material_id",
         "buyer",
         "version_no",
