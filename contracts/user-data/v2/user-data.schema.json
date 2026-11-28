@@ -3522,6 +3522,108 @@
     "PeriodRule": {
       "additionalProperties": false,
       "description": "固定期间（start、end）；定期报告最近 N 个完整的报告期（latest + count，\n可加截至任务日期已披露）；其余类型最近 N 个月内披露的（recent + months），\n或不限期间（none）。定期报告的期间是报告期，其余类型的期间是披露时间窗\n（SDD 0049）。",
+      "oneOf": [
+        {
+          "properties": {
+            "count": {
+              "type": "null"
+            },
+            "end": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "kind": {
+              "const": "fixed"
+            },
+            "months": {
+              "type": "null"
+            },
+            "start": {
+              "not": {
+                "type": "null"
+              }
+            }
+          },
+          "required": [
+            "kind",
+            "end",
+            "start"
+          ]
+        },
+        {
+          "properties": {
+            "count": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "end": {
+              "type": "null"
+            },
+            "kind": {
+              "const": "latest"
+            },
+            "months": {
+              "type": "null"
+            },
+            "start": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "kind",
+            "count"
+          ]
+        },
+        {
+          "properties": {
+            "count": {
+              "type": "null"
+            },
+            "end": {
+              "type": "null"
+            },
+            "kind": {
+              "const": "recent"
+            },
+            "months": {
+              "not": {
+                "type": "null"
+              }
+            },
+            "start": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "kind",
+            "months"
+          ]
+        },
+        {
+          "properties": {
+            "count": {
+              "type": "null"
+            },
+            "end": {
+              "type": "null"
+            },
+            "kind": {
+              "const": "none"
+            },
+            "months": {
+              "type": "null"
+            },
+            "start": {
+              "type": "null"
+            }
+          },
+          "required": [
+            "kind"
+          ]
+        }
+      ],
       "properties": {
         "count": {
           "anyOf": [
@@ -3886,6 +3988,43 @@
         "created"
       ],
       "title": "PublicOriginalRead",
+      "type": "object"
+    },
+    "PurchaseIdentity": {
+      "additionalProperties": false,
+      "properties": {
+        "buyer": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Buyer",
+          "type": "string"
+        },
+        "material_id": {
+          "maxLength": 64,
+          "minLength": 1,
+          "title": "Material Id",
+          "type": "string"
+        },
+        "seller": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Seller",
+          "type": "string"
+        },
+        "transaction_ref": {
+          "maxLength": 255,
+          "minLength": 1,
+          "title": "Transaction Ref",
+          "type": "string"
+        }
+      },
+      "required": [
+        "seller",
+        "material_id",
+        "buyer",
+        "transaction_ref"
+      ],
+      "title": "PurchaseIdentity",
       "type": "object"
     },
     "PurchaseIn": {
