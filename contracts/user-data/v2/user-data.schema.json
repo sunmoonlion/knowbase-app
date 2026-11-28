@@ -3267,6 +3267,15 @@
           "default": "consolidated",
           "title": "Consolidation"
         },
+        "disclosure": {
+          "default": "first",
+          "enum": [
+            "first",
+            "latest"
+          ],
+          "title": "Disclosure",
+          "type": "string"
+        },
         "duration": {
           "anyOf": [
             {
@@ -4980,6 +4989,15 @@
           ],
           "default": "consolidated",
           "title": "Consolidation"
+        },
+        "disclosure": {
+          "default": "first",
+          "enum": [
+            "first",
+            "latest"
+          ],
+          "title": "Disclosure",
+          "type": "string"
         },
         "duration": {
           "anyOf": [
