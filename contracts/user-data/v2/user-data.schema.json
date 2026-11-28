@@ -411,6 +411,18 @@
           ],
           "title": "Cas Element"
         },
+        "cas_note": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cas Note"
+        },
         "code": {
           "title": "Code",
           "type": "string"
@@ -444,6 +456,18 @@
     },
     "ChartRead": {
       "properties": {
+        "cas_taxonomy": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Cas Taxonomy"
+        },
         "company_types": {
           "items": {
             "type": "string"
@@ -2321,6 +2345,11 @@
           ],
           "title": "Period End"
         },
+        "ref": {
+          "default": "",
+          "title": "Ref",
+          "type": "string"
+        },
         "rendition_no": {
           "title": "Rendition No",
           "type": "integer"
@@ -3735,6 +3764,36 @@
       "title": "PlatformProcessRead",
       "type": "object"
     },
+    "PreferenceIn": {
+      "additionalProperties": false,
+      "properties": {
+        "consumer": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Consumer",
+          "type": "string"
+        },
+        "key": {
+          "$ref": "#/$defs/DescriptionKeyModel"
+        },
+        "material_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Material Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "consumer",
+        "key",
+        "material_ids"
+      ],
+      "title": "PreferenceIn",
+      "type": "object"
+    },
     "PreferenceRead": {
       "properties": {
         "key_id": {
@@ -4454,6 +4513,33 @@
         "reason"
       ],
       "title": "ResultItemRead",
+      "type": "object"
+    },
+    "ReviseNeedsIn": {
+      "additionalProperties": false,
+      "description": "用户确认前改过的整份描述（换主体、改期间、去掉、自己加一样）。",
+      "properties": {
+        "needs": {
+          "items": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/DataRequest"
+              },
+              {
+                "$ref": "#/$defs/FactRequest"
+              }
+            ]
+          },
+          "maxItems": 20,
+          "minItems": 1,
+          "title": "Needs",
+          "type": "array"
+        }
+      },
+      "required": [
+        "needs"
+      ],
+      "title": "ReviseNeedsIn",
       "type": "object"
     },
     "RunFactsIn": {
